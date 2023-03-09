@@ -29,3 +29,7 @@
    chmod +x deploy_to_github.sh
    ```
    部署直接执行 deploy_to_github.sh
+
+4. 增加React snippets
+
+5. 配置eslint：https://github.com/antfu/eslint-config
