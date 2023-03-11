@@ -53,3 +53,10 @@
     - VSCode设置--工作区--搜索codeActions---Editor: Code Actions On Save--"source.fixAll": true
 
 6. 增加路由[react-router-dom](https://reactrouter.com/en/main/start/tutorial)
+
+7. CSS IN JS
+    - CSS Module
+    可以配合classnames
+    - [styled-components](https://styled-components.com/)
+
+    - Tailwind.css/[WindiCSS](https://windicss.org/utilities/general/colors.html)/[Unocss](https://github.com/unocss/unocss)
