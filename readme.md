@@ -33,5 +33,23 @@
 4. 增加React snippets
 
 5. 配置eslint：https://github.com/antfu/eslint-config
+    - 添加.editorconfig 统一不同的编辑器的代码样式 https://editorconfig.org/
+    ```sh
+    root = true
 
-6. 增加[react-router-dom](https://reactrouter.com/en/main/start/tutorial)
+    [*]
+    end_of_line = lf
+    insert_final_newline = true
+    charset = utf-8
+    # indent_style = space
+    # indent_size = 2
+    indent_style = tab
+    tab_width = 2
+    trim_trailing_whitespace = true
+    ```
+    - 安装[eslint](https://eslint.bootcss.com/docs/rules/)
+    npm install eslint
+    - VSCode设置--工作区--搜索 formatter --设置default formatter==ESLint
+    - VSCode设置--工作区--搜索codeActions---Editor: Code Actions On Save--"source.fixAll": true
+
+6. 增加路由[react-router-dom](https://reactrouter.com/en/main/start/tutorial)
