@@ -29,14 +29,16 @@ export const WelcomeLayout: React.FC = () => {
   return (
     <div bg="#5f34bf" h-screen flex flex-col py-18px>
       <header flex-shrink-0 text-center >
-        <img src={logo} alt="山竹记账" w-64px />
+        <img src={logo} alt="山竹记账" w-64px h-69px />
         <h1 text="#D4D4EE" text-32px >山竹记账</h1>
       </header>
-      <main flex-grow-1 mx-16px my-15px text-center>
+      <main flex-grow-1 text-center relative>
         {
           transitions((style, pathname) =>
-            <animated.div key={pathname} style={style} flex flex-col justify-center items-center bg-white w="100%" h="100%" rounded-8px >
-              {map.current[pathname]}
+            <animated.div key={pathname} style={style} absolute w="100%" h="100%" p-16px >
+              <div bg-white rounded-8px w="100%" h="100%" flex justify-center items-center >
+                {map.current[pathname]}
+              </div>
             </animated.div>
           )
         }

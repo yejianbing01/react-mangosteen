@@ -11,6 +11,7 @@ declare module 'react' {
     shadow?: boolean,
     bg?: string
     w?: string,
-    h?: string
+    h?: string,
+    absolute?: boolean
   }
 }
