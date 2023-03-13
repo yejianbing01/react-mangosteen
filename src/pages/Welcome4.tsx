@@ -1,12 +1,15 @@
-import type { FC } from 'react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import type { FC } from 'react'
+import cloud from '../assets/images/welcome4.svg'
 
 export const Welcome4: FC = () => {
   return (
     <div>
-      4
-      <Link to={'/welcome/xxx'}> 开始记账 </Link>
+      <img src={cloud} alt="云" />
+      <h2 mt-48px text-32px>
+        云备份<br/>
+        再也不怕数据丢失
+      </h2>
     </div>
   )
 }

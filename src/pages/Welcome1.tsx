@@ -1,12 +1,16 @@
-import type { FC } from 'react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import type { FC } from 'react'
+
+import pig from '../assets/images/welcome1.svg'
 
 export const Welcome1: FC = () => {
   return (
-    <div b-1 b-solid b-red h-40px >
-      1
-      <Link to={'/welcome/2'}> 下一页 </Link>
+    <div>
+      <img src={pig} alt="存钱罐" />
+      <h2 mt-48px text-32px>
+        会挣钱<br/>
+        还要会省钱
+      </h2>
     </div>
   )
 }
