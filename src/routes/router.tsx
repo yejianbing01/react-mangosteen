@@ -6,15 +6,13 @@ import { Welcome1 } from '../pages/Welcome1'
 import { Welcome2 } from '../pages/Welcome2'
 import { Welcome3 } from '../pages/Welcome3'
 import { Welcome4 } from '../pages/Welcome4'
+import { Home } from '../pages/Home'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
-    // children: [
-    //   { index: true, element: <Navigate to={hasReadWelcome === 'yes' ? '/home' : '/welcome/1'} /> },
-    // ]
   },
   {
     path: '/welcome',
@@ -26,8 +24,5 @@ export const router = createBrowserRouter([
       { path: '4', element: <Welcome4 /> },
     ]
   },
-  {
-    path: '/home',
-    element: <div>home</div>
-  },
+  { path: '/home', element: <Home /> },
 ])

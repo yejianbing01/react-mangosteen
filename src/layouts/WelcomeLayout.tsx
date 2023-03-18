@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate, useOutlet } from 'react-router-dom'
 
 import logo from '../assets/images/logo.svg'
 import { useSwipe } from '../hooks/useSwipe'
+import { useLocalStore } from '../stores/localStore'
 
 const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
@@ -19,6 +20,7 @@ export const WelcomeLayout: React.FC = () => {
   const location = useLocation()
   const nav = useNavigate()
   const animating = useRef(false)
+  const { setHasReadWelcomes: setReadWelcomes } = useLocalStore()
 
   const outlet = useOutlet()
   map.current[location.pathname] = outlet
@@ -40,7 +42,7 @@ export const WelcomeLayout: React.FC = () => {
     onRest: () => animating.current = false
   })
 
-  const onReadEnd = () => localStorage.setItem('hasReadWelcome', 'yes')
+  const onReadEnd = () => setReadWelcomes(true)
 
   return (
     <div bg="#5f34bf" h-screen flex flex-col py-18px overflow-hidden >
