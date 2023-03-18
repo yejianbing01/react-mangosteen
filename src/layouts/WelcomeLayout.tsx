@@ -10,7 +10,7 @@ const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
   '/welcome/2': '/welcome/3',
   '/welcome/3': '/welcome/4',
-  '/welcome/4': '/welcome/xx',
+  '/welcome/4': '/home',
 }
 
 export const WelcomeLayout: React.FC = () => {
@@ -41,7 +41,7 @@ export const WelcomeLayout: React.FC = () => {
   })
 
   return (
-    <div bg="#5f34bf" h-screen flex flex-col py-18px overflow-y-hidden >
+    <div bg="#5f34bf" h-screen flex flex-col py-18px overflow-hidden >
       <header flex-shrink-0 text-center >
         <img src={logo} alt="山竹记账" w-64px h-69px />
         <h1 text="#D4D4EE" text-32px >山竹记账</h1>
@@ -59,7 +59,7 @@ export const WelcomeLayout: React.FC = () => {
       </main>
       <footer flex-shrink-0 grid grid-rows-1 grid-cols-3 text-center text-24px >
         <Link to={linkMap[location.pathname]} style={{ gridArea: '1 / 2 / 2 / 3' }} text-white >下一页</Link>
-        <Link to={'/welcome/xxx'} style={{ gridArea: '1 / 3 / 2 / 4' }} text-white mr-12px >跳过</Link>
+        <Link to={'/home'} style={{ gridArea: '1 / 3 / 2 / 4' }} text-white mr-12px >跳过</Link>
       </footer>
     </div>
   )
