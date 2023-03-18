@@ -40,6 +40,8 @@ export const WelcomeLayout: React.FC = () => {
     onRest: () => animating.current = false
   })
 
+  const onReadEnd = () => localStorage.setItem('hasReadWelcome', 'yes')
+
   return (
     <div bg="#5f34bf" h-screen flex flex-col py-18px overflow-hidden >
       <header flex-shrink-0 text-center >
@@ -58,8 +60,15 @@ export const WelcomeLayout: React.FC = () => {
         }
       </main>
       <footer flex-shrink-0 grid grid-rows-1 grid-cols-3 text-center text-24px >
-        <Link to={linkMap[location.pathname]} style={{ gridArea: '1 / 2 / 2 / 3' }} text-white >下一页</Link>
-        <Link to={'/home'} style={{ gridArea: '1 / 3 / 2 / 4' }} text-white mr-12px >跳过</Link>
+        <Link
+          to={linkMap[location.pathname]}
+          onClick={linkMap[location.pathname] === '/home' ? onReadEnd : () => {}}
+          style={{ gridArea: '1 / 2 / 2 / 3' }}
+          text-white
+        >
+          下一页
+        </Link>
+        <Link to={'/home'} onClick={onReadEnd} style={{ gridArea: '1 / 3 / 2 / 4' }} text-white mr-12px >跳过</Link>
       </footer>
     </div>
   )

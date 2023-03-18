@@ -1,6 +1,6 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import ErrorPage from '../pages/ErrorPage'
-import { MainLayout } from '../layouts/MainLayout'
+import { Root } from '../components/Root'
 import { WelcomeLayout } from '../layouts/WelcomeLayout'
 import { Welcome1 } from '../pages/Welcome1'
 import { Welcome2 } from '../pages/Welcome2'
@@ -10,9 +10,11 @@ import { Welcome4 } from '../pages/Welcome4'
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: <Root />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Navigate to={'/welcome/1'} /> }]
+    // children: [
+    //   { index: true, element: <Navigate to={hasReadWelcome === 'yes' ? '/home' : '/welcome/1'} /> },
+    // ]
   },
   {
     path: '/welcome',
