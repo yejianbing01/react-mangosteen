@@ -2,9 +2,10 @@ import type { FC } from 'react'
 import useSWR from 'swr'
 import { Navigate } from 'react-router-dom'
 import pig from '../assets/images/pig.svg'
-import add from '../assets/icons/add.svg'
 import { ajax } from '../lib/ajax'
 import { useTitle } from '../hooks/useTitle'
+import { Loading } from '../components/Loading'
+import { AddItemFloatButton } from '../components/AddItemFloatButton'
 
 interface Props {
   title?: string
@@ -24,7 +25,7 @@ export const Home: FC<Props> = (props) => {
   )
 
   if (meLoading || itemsLoading) {
-    return <div>loading...</div>
+    return <Loading />
   }
 
   if (meError || itemsError) {
@@ -41,9 +42,7 @@ export const Home: FC<Props> = (props) => {
       <div p-x-16px w="100%">
         <button w="100%" bg="#5f34bf" h-48px rounded-8px text-white >开始记账</button>
       </div>
-      <button w-48px h-48px rounded="50%" bg="#5f34bf" fixed bottom-16px right-16px >
-        <img src={add} alt="加号" max-h="100%" max-w="100%" v-top />
-      </button>
+      <AddItemFloatButton />
     </div>
   )
 }
