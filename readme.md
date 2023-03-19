@@ -63,5 +63,6 @@
         - unocss插件 "UnoCSS"
     
 8. Mock
+    - [vit-plugin-mock](https://github.com/vbenjs/vite-plugin-mock)
 
 9. swr
