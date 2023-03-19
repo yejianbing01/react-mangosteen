@@ -25,7 +25,7 @@ export const Home: FC<Props> = (props) => {
   )
 
   if (meLoading || itemsLoading) {
-    return <Loading />
+    return <Loading classNames='h-screen' />
   }
 
   if (meError || itemsError) {
