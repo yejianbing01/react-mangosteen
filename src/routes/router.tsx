@@ -24,5 +24,6 @@ export const router = createBrowserRouter([
       { path: '4', element: <Welcome4 /> },
     ]
   },
-  { path: '/home', element: <Home /> },
+  { path: '/home', element: <Home title={'首页'} /> },
+  { path: '/items', element: <div>items</div> },
 ])

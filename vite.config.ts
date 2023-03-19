@@ -5,6 +5,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => ({
+  define: {
+    isDev: command === 'serve'
+  },
   plugins: [
     UnoCSS(),
     react(),

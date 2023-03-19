@@ -65,4 +65,6 @@
 8. Mock
     - [vit-plugin-mock](https://github.com/vbenjs/vite-plugin-mock)
 
-9. swr
+9. [axios封装](https://juejin.cn/post/6844903569745788941)
+
+10. [swr](https://github.com/vercel/swr)
