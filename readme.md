@@ -56,7 +56,7 @@
 
 7. CSS IN JS
     - CSS Module
-    可以配合classnames
+    可以配合[classnames](https://github.com/JedWatson/classnames)
     - [styled-components](https://styled-components.com/)
 
     - Tailwind.css/[WindiCSS](https://windicss.org/utilities/general/colors.html)/[Unocss](https://github.com/unocss/unocss)

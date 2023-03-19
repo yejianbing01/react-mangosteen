@@ -1,9 +1,15 @@
 import type { FC } from 'react'
+import c from 'classnames'
 
-export const Icon: FC = () => {
+interface Props {
+  name: string
+  className?: string
+}
+
+export const Icon: FC<Props> = ({ name, className }) => {
   return (
-    <svg style={{ width: '1.2em', height: '1.2em', fill: 'red' }} >
-      <use xlinkHref={'#add'}></use>
+    <svg className={c(className, 'mangosteen-icon')} >
+      <use xlinkHref={`#${name}`}></use>
     </svg>
   )
 }
