@@ -40,7 +40,7 @@ export const Home: FC<Props> = (props) => {
     <div text-center>
       <img src={pig} alt="存钱罐" m-y-20vh />
       <div p-x-16px w="100%">
-        <button w="100%" bg="#5f34bf" h-48px rounded-8px text-white >开始记账</button>
+        <button j-btn >开始记账</button>
       </div>
       <AddItemFloatButton />
     </div>
