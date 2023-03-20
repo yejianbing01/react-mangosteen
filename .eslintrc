@@ -7,6 +7,7 @@
     "@typescript-eslint/brace-style": 0,
     "@typescript-eslint/comma-dangle": 0,
     "no-multiple-empty-lines": ["error", { "max":1 }],
-    "max-statements-per-line": 0
+    "max-statements-per-line": 0,
+    "no-tabs": 0
   }
 }
