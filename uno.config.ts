@@ -7,7 +7,8 @@ export default defineConfig({
   theme: {
   },
   shortcuts: {
-    'j-btn': 'w-100% bg-#5f34bf h-48px rounded-8px text-white'
+    'j-btn': 'w-100% bg-#5f34bf h-48px rounded-8px text-white',
+    'j-bg': 'bg-#5f34bf'
   },
   safelist: [],
   presets: [
