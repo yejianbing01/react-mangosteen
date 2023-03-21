@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate, useOutlet } from 'react-router-dom'
 
 import logo from '../assets/images/logo.svg'
 import { useSwipe } from '../hooks/useSwipe'
-import { useLocalStore } from '../stores/localStore'
+import { useLocalStore } from '../stores/useLocalStore'
 
 const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
