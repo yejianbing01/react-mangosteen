@@ -38,7 +38,7 @@ const items: Item[] = [
 
 export const ItemsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
-  const { visible } = useTopMenuStore()
+  const { visible, setVisible } = useTopMenuStore()
   return (
 		<div>
 			<Div>
@@ -48,7 +48,7 @@ export const ItemsPage: FC = () => {
 			<ItemsSummary />
 			<ItemsList items={items} />
 			<AddItemFloatButton />
-			{visible ? <TopMenu/> : ''}
+			{visible ? <TopMenu onMaskClick={() => setVisible(false)} /> : ''}
 		</div>
   )
 }
