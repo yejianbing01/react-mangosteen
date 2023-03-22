@@ -12,7 +12,7 @@ export const TopNav: FC<Props> = ({ title }) => {
 		<div flex items-center px-24px py-24px gap-16px >
 			<Icon
 				name='menu'
-				className='color-white w-24px h-24px'
+				className='color-white w-24px h-24px cursor-pointer'
 				onClick={() => setVisible(!visible)}
 			/>
 			<h1 text-white text-24px >{title}</h1>

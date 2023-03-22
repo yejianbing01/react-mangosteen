@@ -48,7 +48,7 @@ export const ItemsPage: FC = () => {
 			<ItemsSummary />
 			<ItemsList items={items} />
 			<AddItemFloatButton />
-			{visible ? <TopMenu onMaskClick={() => setVisible(false)} /> : ''}
+      <TopMenu isVisible={visible} onMaskClick={() => setVisible(false)} />
 		</div>
   )
 }
