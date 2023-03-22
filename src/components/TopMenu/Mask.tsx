@@ -9,7 +9,7 @@ interface Props {
   onClick?: (e: React.MouseEvent) => void
 }
 export const Mask: FC<Props> = ({ isVisible, className, onClick }) => {
-  const [maskVisible, setMaskVisible] = useState(false)
+  const [maskVisible, setMaskVisible] = useState(isVisible)
 
   const maskStyle = useSpring({
     opacity: isVisible ? 1 : 0,

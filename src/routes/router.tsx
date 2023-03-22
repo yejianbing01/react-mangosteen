@@ -27,4 +27,9 @@ export const router = createBrowserRouter([
   },
   { path: '/home', element: <Home title={'首页'} /> },
   { path: '/items', element: <ItemsPage /> },
+  { path: '/sign_in', element: <div>登录</div> },
+  { path: '/chart', element: <div>统计图表</div> },
+  { path: '/export', element: <div>导出数据</div> },
+  { path: '/tags', element: <div>自定义标签</div> },
+  { path: '/noty', element: <div>记账提醒</div> },
 ])

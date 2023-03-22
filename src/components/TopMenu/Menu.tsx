@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { Icon } from '../Icon'
 
@@ -8,13 +9,24 @@ const NavIcon = styled(Icon)`
 interface Props {
   className?: string
 }
+
+const menuItems = [
+  { path: '/chart', text: '统计图表', icon: 'chart' },
+  { path: '/export', text: '导出数据', icon: 'export' },
+  { path: '/tags', text: '自定义标签', icon: 'category' },
+  { path: '/noty', text: '记账提醒', icon: 'noty' },
+]
+
 export const Menu: FC<Props> = ({ className }) => {
   return (
-    <ul p-16px children-mb-12px children-flex children-items-center className={className} >
-      <li><NavIcon name={'chart'}/>统计图表</li>
-      <li><NavIcon name={'export'}/>导出数据</li>
-      <li><NavIcon name={'category'}/>自定义标签</li>
-      <li><NavIcon name={'noty'}/>记账提醒</li>
+    <ul p-16px className={className} >
+      {menuItems.map(item => (
+        <li key={item.path} mb-12px >
+          <NavLink to={item.path} flex items-center>
+            <NavIcon name={item.icon}/>{item.text}
+          </NavLink>
+        </li>
+      ))}
     </ul>
   )
 }
