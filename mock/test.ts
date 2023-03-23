@@ -1,4 +1,35 @@
 import type { MockMethod } from 'vite-plugin-mock'
+import { faker } from '@faker-js/faker'
+
+function getItem(): Item {
+  return {
+    id: faker.datatype.uuid(),
+    user_id: faker.datatype.uuid(),
+    amount: faker.datatype.number({ min: 100, max: 10000 }),
+    tag_ids: [1, 2],
+    happen_at: faker.datatype.datetime().toISOString(),
+    created_at: faker.datatype.datetime().toISOString(),
+    updated_at: faker.datatype.datetime().toISOString(),
+    kind: 'expenses' as const,
+    note: faker.datatype.string(5)
+  }
+}
+
+function getItems(num: number): Item[] {
+  return Array.from({ length: num }).map(() => getItem())
+}
+
+function createResponse({ page = 1, limit = 10 }): Resources<Item> {
+  const items = getItems(53)
+  return {
+    resources: items.slice((page - 1) * limit, limit * page),
+    pager: {
+      page,
+      per_page: limit,
+      count: 53
+    }
+  }
+}
 
 export default [
   {
@@ -8,7 +39,7 @@ export default [
     response: (): Resource<User> => {
       return {
         resource: {
-          id: 1,
+          id: '1',
           email: 'xxx@xxx.com',
           updated_at: '2021-08-01T00:00:00.000Z',
           created_at: '2021-08-01T00:00:00.000Z',
@@ -19,24 +50,9 @@ export default [
   {
     url: '/api/v1/items',
     method: 'get',
-    response: (): Resources<Item> => {
-      return {
-        resources: [{
-          id: 1,
-          user_id: 1,
-          amount: 1000,
-          tag_ids: [1, 2],
-          happen_at: '2021-08-01T00:00:00.000Z',
-          created_at: '2021-08-01T00:00:00.000Z',
-          updated_at: '2021-08-01T00:00:00.000Z',
-          kind: 'expenses',
-        }],
-        pager: {
-          page: 1,
-          per_page: 25,
-          count: 100
-        }
-      }
+    response: ({ query }: ResponseParams): Resources<Item> => {
+      const { page, limit } = query
+      return createResponse({ page: Number(page), limit: Number(limit) })
     },
   },
   {

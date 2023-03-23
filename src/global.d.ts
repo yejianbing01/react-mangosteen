@@ -11,15 +11,15 @@ interface Resources<T> {
   }
 }
 interface User {
-  id: number
+  id: string
   email: string
   name?: string
   created_at: string
   updated_at: string
 }
 interface Item {
-  id: number
-  user_id: number
+  id: string
+  user_id: string
   amount: number
   note?: string
   tag_ids: number[]
