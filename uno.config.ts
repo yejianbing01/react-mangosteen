@@ -8,7 +8,8 @@ export default defineConfig({
   },
   shortcuts: {
     'j-btn': 'w-100% bg-#5f34bf h-48px rounded-8px text-white',
-    'j-bg': 'bg-#5f34bf'
+    // 'j-bg': 'bg-#5f34bf',
+    'j-bg': 'bg-gradient-to-t from-#8f4cd7 to-#5c33be'
   },
   safelist: [],
   presets: [
