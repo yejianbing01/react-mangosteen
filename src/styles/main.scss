@@ -1,4 +1,5 @@
 :root {
+	--un-shadow-color: rgba(0,0,0,0.25);
 	--z-default: 128;
 	--z-menu: 256;
 }
@@ -34,4 +35,8 @@ ul,ol {
 button {
   font: inherit;
 	border: none;
+}
+
+:focus {
+	outline: none;
 }

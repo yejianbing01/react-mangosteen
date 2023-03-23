@@ -8,8 +8,10 @@ export default defineConfig({
   },
   shortcuts: {
     'j-btn': 'w-100% bg-#5f34bf h-48px rounded-8px text-white',
-    // 'j-bg': 'bg-#5f34bf',
-    'j-bg': 'bg-gradient-to-t from-#8f4cd7 to-#5c33be'
+    'j-bg': 'bg-gradient-to-t from-#8f4cd7 to-#5c33be',
+    'j-form': 'px-16px flex flex-col children-flex children-flex-col gap-y-24px',
+    'j-form-label': 'text-18px mb-8px',
+    'j-form-input': 'h-48px px-16px leading-32px py-8px b="#5C33BE" b-1 focus:shadow focus:shadow-inset rounded-8px text-18px'
   },
   safelist: [],
   presets: [
