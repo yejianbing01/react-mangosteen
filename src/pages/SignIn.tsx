@@ -1,13 +1,19 @@
-import type { FC } from 'react'
+import type { FC, FormEventHandler } from 'react'
 import { Icon } from '../components/Icon'
 import { TopNav } from '../components/TopNav'
 import { useTitle } from '../hooks/useTitle'
+import { useSignInStore } from '../stores/useSignIdStore'
 
 interface Props {
   title?: string
 }
 export const SignIn: FC<Props> = ({ title }) => {
   useTitle(title)
+  const { data, setData } = useSignInStore()
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+  }
 
   return (
     <>
@@ -18,22 +24,26 @@ export const SignIn: FC<Props> = ({ title }) => {
         <Icon name="logo" className="w-64px h-68px" />
         <h1 text-32px text="#7878FF" font-bold>山竹记账</h1>
       </div>
-      <div j-form >
+      <form j-form onSubmit={onSubmit}>
         <div>
           <span j-form-label>邮箱地址</span>
-          <input type="text" placeholder='请输入邮箱，再点击发送验证码' j-form-input />
+          <input value={data.email} type="text" placeholder='请输入邮箱，再点击发送验证码'j-form-input
+            onChange={e => setData({ email: e.target.value })}
+          />
         </div>
         <div>
           <span j-form-label>验证码</span>
           <div flex gap-x-16px>
-            <input type="text" placeholder='六位数字' w-128px j-form-input />
+            <input value={data.code} type="text" placeholder='六位数字' w-128px j-form-input
+              onChange={e => setData({ code: e.target.value })}
+            />
             <button j-btn>发送验证码</button>
           </div>
         </div>
         <div mt-60px>
           <button type="submit" j-btn>登录</button>
         </div>
-      </div>
+      </form>
     </>
   )
 }

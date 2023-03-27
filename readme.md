@@ -68,3 +68,5 @@
 9. [axios封装](https://juejin.cn/post/6844903569745788941)
 
 10. [swr](https://github.com/vercel/swr)
+
+11. transform 导致fixed失败
