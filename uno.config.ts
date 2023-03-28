@@ -13,6 +13,9 @@ export default defineConfig({
     'j-form-label': 'text-18px mb-8px',
     'j-form-input': 'h-48px px-16px leading-32px py-8px b="#5C33BE" b-1 focus:shadow focus:shadow-inset rounded-8px text-18px'
   },
+  rules: [
+    ['h-screen', { height: 'calc(100vh - var(--vh-offset, 0px))' }]
+  ],
   safelist: [],
   presets: [
     presetUno(),
