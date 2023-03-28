@@ -1,8 +1,10 @@
 import type { FC, FormEventHandler } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Icon } from '../components/Icon'
 import { TopNav } from '../components/TopNav'
 import { useTitle } from '../hooks/useTitle'
-import { validate } from '../lib/validate'
+import { ajax } from '../lib/ajax'
+import { hasError, validate } from '../lib/validate'
 import { useSignInStore } from '../stores/useSignIdStore'
 
 interface Props {
@@ -11,6 +13,7 @@ interface Props {
 export const SignIn: FC<Props> = ({ title }) => {
   useTitle(title)
   const { data, setData, error, setError } = useSignInStore()
+  const nav = useNavigate()
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -22,6 +25,11 @@ export const SignIn: FC<Props> = ({ title }) => {
       { key: 'code', type: 'length', min: 6, max: 6, message: '验证码为6位' }
     ])
     setError(error)
+
+    if (!hasError(error)) {
+      ajax.post('/api/v1/session', data)
+      nav('/home')
+    }
   }
 
   return (
