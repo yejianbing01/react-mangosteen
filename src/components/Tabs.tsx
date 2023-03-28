@@ -3,12 +3,13 @@ interface Props<T> {
   tabItems: { key: T; text: string }[]
   value: T
   onChange: (value: T) => void
+  className?: string
 }
 
 export const Tabs = <T extends string>(props: Props<T>) => {
-  const { tabItems, value, onChange } = props
+  const { tabItems, value, onChange, className } = props
   return (
-			<ol text-white flex children-px-24px children-pb-12px >
+			<ol className={className} text-white flex children-px-24px children-pb-12px >
 				{
 					tabItems.map(({ key, text }) =>
 						<li

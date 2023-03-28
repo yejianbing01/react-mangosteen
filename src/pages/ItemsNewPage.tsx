@@ -4,18 +4,22 @@ import { Icon } from '../components/Icon'
 import { Tabs } from '../components/Tabs'
 import { TopNav } from '../components/TopNav'
 
-export const ItemsNewPage: FC = () => {
-  const [type, setType] = useState('out')
+type ItemKind = 'expenses' | 'income'
 
-  const items = [
-    { key: 'out', text: '支出' },
-    { key: 'in', text: '收入' },
+export const ItemsNewPage: FC = () => {
+  const [type, setType] = useState<ItemKind>('expenses')
+
+  const items: { key: ItemKind ; text: string }[] = [
+    { key: 'expenses', text: '支出' },
+    { key: 'income', text: '收入' },
   ]
 
   return (
 		<div j-bg >
 			<TopNav title='记一笔' icon={<Icon name='back' />} />
-			<Tabs tabItems={items} value={type} onChange={value => setType(value)} />
+			<Tabs tabItems={items} value={type} onChange={value => setType(value)}
+				className="children-grow-1 text-center"
+			/>
 		</div>
   )
 }
