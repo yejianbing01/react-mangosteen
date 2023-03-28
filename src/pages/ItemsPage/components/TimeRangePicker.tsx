@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import styles from './TimeRangePicker.module.scss'
+import { Tabs } from '../../../components/Tabs'
 
 export type TimeRange = 'thisMonth' | 'lastMonth' | 'thisYear' | 'custom'
 interface Props {
@@ -16,20 +16,6 @@ const timeRanges: { key: TimeRange; text: string }[] = [
 
 export const TimeRangePicker: FC<Props> = ({ selected = 'thisMonth', onChange }) => {
   return (
-		<div>
-			<ol text-white flex children-px-24px children-pb-12px >
-				{
-					timeRanges.map(({ key, text }) =>
-						<li
-							key={key}
-							onClick={() => onChange(key)}
-							className={key === selected ? styles.selected : ''}
-						>
-							{text}
-						</li>
-					)
-				}
-			</ol>
-		</div>
+		<Tabs tabItems={timeRanges} value={selected} onChange={onChange} />
   )
 }

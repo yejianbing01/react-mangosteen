@@ -9,6 +9,7 @@ import { Welcome4 } from '../pages/Welcome4'
 import { Home } from '../pages/Home'
 import { ItemsPage } from '../pages/ItemsPage'
 import { SignIn } from '../pages/SignIn'
+import { ItemsNewPage } from '../pages/ItemsNewPage'
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
   },
   { path: '/home', element: <Home title={'首页'} /> },
   { path: '/items', element: <ItemsPage /> },
+  { path: '/items/new', element: <ItemsNewPage /> },
   { path: '/sign_in', element: <SignIn title={'登录'} /> },
   { path: '/chart', element: <div>统计图表</div> },
   { path: '/export', element: <div>导出数据</div> },
