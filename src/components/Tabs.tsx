@@ -1,6 +1,7 @@
+import type { ReactNode } from 'react'
 
 interface Props<T> {
-  tabItems: { key: T; text: string }[]
+  tabItems: { key: T; text: string; element?: ReactNode }[]
   value: T
   onChange: (value: T) => void
   className?: string
@@ -8,7 +9,9 @@ interface Props<T> {
 
 export const Tabs = <T extends string>(props: Props<T>) => {
   const { tabItems, value, onChange, className } = props
+  const curElement = tabItems.find(tabItem => tabItem.key === value)?.element
   return (
+		<>
 			<ol className={className} text-white flex children-px-24px children-pb-12px >
 				{
 					tabItems.map(({ key, text }) =>
@@ -22,5 +25,9 @@ export const Tabs = <T extends string>(props: Props<T>) => {
 					)
 				}
 			</ol>
+			<div>
+				{curElement}
+			</div>
+		</>
   )
 }
