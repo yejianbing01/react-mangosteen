@@ -11,10 +11,12 @@ export const Tabs = <T extends string>(props: Props<T>) => {
   const { tabItems, value, onChange, className } = props
   const curElement = tabItems.find(tabItem => tabItem.key === value)?.element
   return (
-		<>
-			<ol className={className} text-white flex children-px-24px children-pb-12px >
-				{
-					tabItems.map(({ key, text }) =>
+		<div flex flex-col h="100%">
+			<ol className={className}
+				text-white flex children-px-24px children-pb-12px
+				grow-0 shrink-0
+			>
+				{tabItems.map(({ key, text }) =>
 						<li
 							key={key}
 							onClick={() => onChange(key)}
@@ -22,12 +24,11 @@ export const Tabs = <T extends string>(props: Props<T>) => {
 						>
 							{text}
 						</li>
-					)
-				}
+				)}
 			</ol>
-			<div>
+			<div overflow-scroll grow-1 shrink-1>
 				{curElement}
 			</div>
-		</>
+		</div>
   )
 }
