@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react'
 import { useState } from 'react'
+import { Drawer } from '../../components/Drawer'
 import { Icon } from '../../components/Icon'
 import { Tabs } from '../../components/Tabs'
 import { TopNav } from '../../components/TopNav'
@@ -10,6 +11,7 @@ type ItemKind = 'expenses' | 'income'
 
 export const ItemsNewPage: FC = () => {
   const [type, setType] = useState<ItemKind>('expenses')
+  const [datePickVisible, setDatePickVisible] = useState(false)
 
   const items: { key: ItemKind; text: string; element: ReactNode }[] = [
     { key: 'expenses', text: '支出', element: <Tags/> },
@@ -24,7 +26,10 @@ export const ItemsNewPage: FC = () => {
     			className="children-grow-1 text-center bg-[#8f4cd7]"
         />
       </div>
-      <DateAndAmount className='grow-0 shrink-0'/>
+      <DateAndAmount className='grow-0 shrink-0' onDateClick={() => setDatePickVisible(true)} />
+      <Drawer placement="bottom" visible={datePickVisible} onClose={() => setDatePickVisible(false)} >
+        <div h-100px>hi</div>
+      </Drawer>
     </div>
   )
 }

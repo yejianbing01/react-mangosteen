@@ -3,13 +3,14 @@ import { Icon } from '../../components/Icon'
 
 interface Props {
   className?: string
+  onDateClick?: () => void
 }
-export const DateAndAmount: FC<Props> = ({ className }) => {
+export const DateAndAmount: FC<Props> = ({ className, onDateClick }) => {
   return (
 		<div className={className} >
 			<div flex p-t-15px p-b-16px px-16px border-t-1px border-t="#ddd" gap-x-8px items-center>
-				<Icon name="calendar" className="w-24px h-24px grow-0 shrink-0" />
-				<span grow-0 shrink-0 text-12px color="#999">2001-02-03</span>
+				<Icon name="calendar" className="w-24px h-24px grow-0 shrink-0" onClick={onDateClick} />
+				<span grow-0 shrink-0 text-12px color="#999" onClick={onDateClick}>2001-02-03</span>
 				<code grow-1 shrink-1 text-right color="#53A867">123456789.01</code>
 			</div>
 			<div py-1px grid grid-rows="[repeat(4,56px)]" grid-cols-4 bg="#ddd" gap-1px children-bg-white >
