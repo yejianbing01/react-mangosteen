@@ -2,13 +2,13 @@ import type { FC } from 'react'
 import { useState } from 'react'
 import { AddItemFloatButton } from '../../components/AddItemFloatButton'
 import { TopNav } from '../../components/TopNav'
-import { TopMenu } from '../../components/TopMenu'
 import { useTopMenuStore } from '../../stores/useTopMenuStore'
 import { Icon } from '../../components/Icon'
 import type { TimeRange } from './components/TimeRangePicker'
 import { ItemsList } from './components/ItemsList'
 import { ItemsSummary } from './components/ItemsSummary'
 import { TimeRangePicker } from './components/TimeRangePicker'
+import { TopMenu } from './components/TopMenu'
 
 export const ItemsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
