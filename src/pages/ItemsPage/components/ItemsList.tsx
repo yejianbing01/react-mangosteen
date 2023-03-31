@@ -30,7 +30,7 @@ export const ItemsList: FC = () => {
   return (
 		<div>
 			{getItems().map(item => (
-				<div grid grid-rows-2 grid-cols="[auto_1fr_auto]" px-16px py-8px gap-x-12px border-b-1px b-b-solid b="#EEE" >
+				<div key={item.id} grid grid-rows-2 grid-cols="[auto_1fr_auto]" px-16px py-8px gap-x-12px border-b-1px b-b-solid b="#EEE" >
 					<div row-start-1 col-start-1 row-end-3 col-end-2 w-48px h-48px rounded="50%" bg="#D8D8D8" text-center leading-48px >💰</div>
 					<div row-start-1 col-start-2 row-end-2 col-end-3>{item.note }</div>
 					<div row-start-2 col-start-2 row-end-3 col-end-4 text="#999999">{ item.happen_at }</div>

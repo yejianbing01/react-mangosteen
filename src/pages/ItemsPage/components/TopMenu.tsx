@@ -16,13 +16,13 @@ interface Props {
 }
 export const TopMenu: FC<Props> = ({ isVisible, onMaskClick }) => {
   return (
-    <Drawer visible={isVisible} onClose={onMaskClick} >
-      <div w-20em>
+    <Drawer placement="left" visible={isVisible} onClose={onMaskClick} >
+      <div w-60vw flex flex-col>
         <Link to="/sign_in" flex flex-col grow-0 shrink-0 j-bg px-16px pt-32px pb-42px >
           <h2 text-white text-24px>未登录用户</h2>
           <p text="#CEA1FF">点击这里登录</p>
         </Link>
-        <ul p-16px grow-1 shrink-1 >
+        <ul p-16px grow-1 shrink-1>
           {menuItems.map(item => (
             <li key={item.path} mb-12px >
               <NavLink to={item.path} flex items-center>
