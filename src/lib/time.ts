@@ -105,6 +105,9 @@ export class Time {
   }
 
   set year(v) {
+    const days = new Date(v, this.month, 0).getDate()
+    this.day = this.day >= days ? days : this.day
+
     this.parts = { year: v }
   }
 
@@ -113,6 +116,9 @@ export class Time {
   }
 
   set month(v) {
+    const days = new Date(this.year, v, 0).getDate()
+    this.day = this.day >= days ? days : this.day
+
     this.parts = { month: v }
   }
 
