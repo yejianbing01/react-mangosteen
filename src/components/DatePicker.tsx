@@ -14,7 +14,18 @@ export const DatePicker: FC = () => {
     setTranslateY(translateY + dy)
     setStartY(curY)
   }
-  const onTouchEnd = () => {}
+  const onTouchEnd = () => {
+    const remainder = Math.abs(translateY) % 36
+    if (translateY > 0) {
+      remainder < 18
+        ? setTranslateY(translateY - remainder)
+        : setTranslateY(translateY - remainder + 36)
+    } else {
+      remainder < 18
+        ? setTranslateY(translateY + remainder)
+	      : setTranslateY(translateY + remainder - 36)
+    }
+  }
 
   return (
 		<div relative h-50vh>
@@ -24,6 +35,7 @@ export const DatePicker: FC = () => {
 				onTouchStart={onTouchStart}
 				onTouchMove={onTouchMove}
 				onTouchEnd={onTouchEnd}
+				transition-all duration-100
 			>
 				<ol text-center children-h-36px children-leading-36px>
 					<li>2001</li>
