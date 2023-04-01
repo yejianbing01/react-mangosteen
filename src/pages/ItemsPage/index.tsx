@@ -15,14 +15,16 @@ export const ItemsPage: FC = () => {
   const { visible, setVisible } = useTopMenuStore()
 
   return (
-		<div>
+		<div flex flex-col h-screen>
 			<div j-bg>
 				<TopNav title='山竹记账' icon={<Icon name="menu" className='w-24px h-24px' onClick={() => setVisible(true)} />} />
 				<TimeRangePicker selected={itemsRange} onChange={selected => setItemsRange(selected)} />
 			</div>
 			<ItemsSummary />
-			<ItemsList />
-			<AddItemFloatButton />
+			<div overflow-scroll >
+				<ItemsList />
+				<AddItemFloatButton />
+			</div>
       <TopMenu isVisible={visible} onMaskClick={() => setVisible(false)} />
 		</div>
   )

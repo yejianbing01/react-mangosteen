@@ -4,6 +4,7 @@ declare module 'react' {
   interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
     flex?: boolean
     relative?: boolean
+    top?: string
     text?: string
     grid?: boolean
     before?: string

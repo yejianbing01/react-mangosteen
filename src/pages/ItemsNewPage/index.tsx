@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react'
 import { useState } from 'react'
+import { DatePicker } from '../../components/DatePicker'
 import { Drawer } from '../../components/Drawer'
 import { Icon } from '../../components/Icon'
 import { Tabs } from '../../components/Tabs'
@@ -28,7 +29,7 @@ export const ItemsNewPage: FC = () => {
       </div>
       <DateAndAmount className='grow-0 shrink-0' onDateClick={() => setDatePickVisible(true)} />
       <Drawer placement="bottom" visible={datePickVisible} onClose={() => setDatePickVisible(false)} >
-        <div h-100px>hi</div>
+        <DatePicker />
       </Drawer>
     </div>
   )
