@@ -1,9 +1,34 @@
 import type { FC } from 'react'
 import { useState } from 'react'
+import { time } from '../lib/time'
 
-export const DatePicker: FC = () => {
-  const [translateY, setTranslateY] = useState(-1)
+interface Props {
+  start?: Date
+  end?: Date
+  value?: Date
+  itemHeight: number
+}
+export const DatePicker: FC<Props> = (props) => {
+  const { start, end, value, itemHeight = 36 } = props
+  const startTime = start ? time(start) : time().add(-10, 'year')
+  const endTime = end ? time(end) : time().add(10, 'year')
+  const curTime = value ? time(value) : time()
+  if (endTime.timestamp <= startTime.timestamp) {
+    throw new Error('结束时间必须大于开始时间')
+  }
+  const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
+    .map((_, index) => startTime.year + index)
+  const curIndex = yearList.indexOf(curTime.year)
+
+  const [translateY, _setTranslateY] = useState(curIndex * -itemHeight)
   const [startY, setStartY] = useState(-1)
+  // 获得移动范围
+  const setTranslateY = (num: number) => {
+    const finalY = num > 0
+      ? Math.min(num, 0)
+      : Math.max(num, (yearList.length - 1) * -itemHeight)
+    _setTranslateY(finalY)
+  }
 
   const onTouchStart = (e: React.TouchEvent) => {
     setStartY(e.touches[0].clientY)
@@ -28,7 +53,7 @@ export const DatePicker: FC = () => {
   }
 
   return (
-		<div relative h-50vh>
+		<div relative h-50vh overflow-hidden>
 			<div h-36px b-1 b-solid b-red absolute top="50%" translate-y="[-50%]" w-screen />
 			<div absolute top="[calc(50%-18px)]" w-screen
 				style={{ transform: `translateY(${translateY}px)` }}
@@ -38,36 +63,7 @@ export const DatePicker: FC = () => {
 				transition-all duration-100
 			>
 				<ol text-center children-h-36px children-leading-36px>
-					<li>2001</li>
-					<li>2002</li>
-					<li>2003</li>
-					<li>2004</li>
-					<li>2005</li>
-					<li>2006</li>
-					<li>2007</li>
-					<li>2008</li>
-					<li>2009</li>
-					<li>2010</li>
-					<li>2011</li>
-					<li>2012</li>
-					<li>2013</li>
-					<li>2014</li>
-					<li>2015</li>
-					<li>2016</li>
-					<li>2017</li>
-					<li>2018</li>
-					<li>2019</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
-					<li>2020</li>
+					{ yearList.map(year => (<li key={year}>{year}</li>)) }
 				</ol>
 			</div>
     </div>
