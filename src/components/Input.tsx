@@ -42,13 +42,3 @@ export const Input: FC<Props> = (props) => {
 		</div>
   )
 }
-
-// <div>
-//   <span j-form-label>验证码{error.code?.[0] && <span text-red>{error.code[0]}</span>}</span>
-//   <div flex gap-x-16px>
-//     <input value={data.code} type="text" placeholder='六位数字' w-128px j-form-input
-//       onChange={e => setData({ code: e.target.value })}
-//     />
-//     <button j-btn>发送验证码</button>
-//   </div>
-// </div>

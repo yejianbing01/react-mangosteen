@@ -25,7 +25,7 @@ export const TagsNewPage: FC = () => {
 					<Input label='标签名' placeholder='请输入标签名' value={tagName} onChange={value => setTagName(value)} />
 					<Input label={emojiLabel} type="emoji" value={emoji} onChange={value => setEmoji(value)} />
 					<div>
-						<p text-center m-y-16px>记账时长按标签，即可进行标记</p>
+						<p text-center m-y-16px>记账时长按标签，即可进行编辑</p>
 						<button j-btn>确认</button>
 					</div>
 				</div>
