@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { useEffect, useRef, useState } from 'react'
+import type { Time } from '../lib/time'
 import { time } from '../lib/time'
 
 interface ColumnProps {
@@ -69,9 +70,11 @@ interface Props {
   end?: Date
   value?: Date
   itemHeight?: number
+  onCancel?: () => void
+  onConfirm?: (value: Time) => void
 }
 export const DatePicker: FC<Props> = (props) => {
-  const { start, end, value, itemHeight = 36 } = props
+  const { start, end, value, itemHeight = 36, onCancel, onConfirm } = props
 
   const [_, update] = useState({})
 
@@ -88,22 +91,29 @@ export const DatePicker: FC<Props> = (props) => {
   const dayList = Array.from({ length: curTime.current.lastDayOfMonth.day }).map((_, index) => index + 1)
 
   return (
-		<div flex >
-			<Column itemList={yearList} value={curTime.current.year} itemHeight={itemHeight}
-				onChange={(year) => {
-				  curTime.current.year = year
-				  update({})
-				}}
-			/>
-			<Column itemList={monthList} value={curTime.current.month} itemHeight={itemHeight}
-				onChange={(month) => {
-				  curTime.current.month = month
-				  update({})
-				}}
-			/>
-			<Column itemList={dayList} value={curTime.current.day} itemHeight={itemHeight}
-				onChange={(day) => { curTime.current.day = day }}
-			/>
-		</div>
+    <div>
+      <div flex justify-between border-b-1px b-solid b="#f3f3f3" children-p-16px>
+        <button text="[var(--button-color)]" onClick={onCancel}>取消</button>
+        <span>时间选择</span>
+        <button text="[var(--button-color)]" onClick={() => onConfirm?.(curTime.current)}>确定</button>
+      </div>
+  		<div flex >
+  			<Column itemList={yearList} value={curTime.current.year} itemHeight={itemHeight}
+  				onChange={(year) => {
+  				  curTime.current.year = year
+  				  update({})
+  				}}
+  			/>
+  			<Column itemList={monthList} value={curTime.current.month} itemHeight={itemHeight}
+  				onChange={(month) => {
+  				  curTime.current.month = month
+  				  update({})
+  				}}
+  			/>
+  			<Column itemList={dayList} value={curTime.current.day} itemHeight={itemHeight}
+  				onChange={(day) => { curTime.current.day = day }}
+  			/>
+  		</div>
+    </div>
   )
 }
