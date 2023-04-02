@@ -9,7 +9,7 @@ import { time } from '../../lib/time'
 import { DateAndAmount } from './DateAndAmount'
 import { Tags } from './Tags'
 
-type ItemKind = 'expenses' | 'income'
+export type ItemKind = 'expenses' | 'income'
 
 export const ItemsNewPage: FC = () => {
   const [type, setType] = useState<ItemKind>('expenses')
@@ -17,8 +17,8 @@ export const ItemsNewPage: FC = () => {
   const [date, setDate] = useState(time().format())
 
   const items: { key: ItemKind; text: string; element: ReactNode }[] = [
-    { key: 'expenses', text: '支出', element: <Tags/> },
-    { key: 'income', text: '收入', element: <Tags/> },
+    { key: 'expenses', text: '支出', element: <Tags kind='expenses'/> },
+    { key: 'income', text: '收入', element: <Tags kind='income'/> },
   ]
 
   return (
