@@ -93,7 +93,9 @@ export const DatePicker: FC<Props> = (props) => {
   return (
     <div>
       <div flex justify-between border-b-1px b-solid b="#f3f3f3" children-p-16px>
-        <button text="[var(--button-color)]" onClick={onCancel}>取消</button>
+        <button text="[var(--button-color)]"
+          onClick={() => { curTime.current = time(value); update({}); onCancel?.() }}
+        >取消</button>
         <span>时间选择</span>
         <button text="[var(--button-color)]" onClick={() => onConfirm?.(curTime.current)}>确定</button>
       </div>
@@ -111,7 +113,7 @@ export const DatePicker: FC<Props> = (props) => {
   				}}
   			/>
   			<Column itemList={dayList} value={curTime.current.day} itemHeight={itemHeight}
-  				onChange={(day) => { curTime.current.day = day }}
+          onChange={(day) => { curTime.current.day = day; update({}) }}
   			/>
   		</div>
     </div>

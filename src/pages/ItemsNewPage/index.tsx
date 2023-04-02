@@ -32,6 +32,7 @@ export const ItemsNewPage: FC = () => {
       <DateAndAmount className='grow-0 shrink-0' onDateClick={() => setDatePickVisible(true)} date={date} />
       <Drawer placement="bottom" visible={datePickVisible} onClose={() => setDatePickVisible(false)} >
         <DatePicker
+          value={new Date(date)}
           onCancel={() => setDatePickVisible(false)}
           onConfirm={(time) => {
             setDate(time.format())

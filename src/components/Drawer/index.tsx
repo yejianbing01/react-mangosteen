@@ -25,7 +25,7 @@ export const Drawer: FC<Props> = (props) => {
   })
 
   return (
-		<div touch-none>
+    <div touch-none>
 			<Mask isVisible={visible} className={'z-[var(--z-min)]'} onClick={onClose} />
 	    <animated.div style={style} z="[calc(var(--z-menu)-1)]" bg-white overflow-hidden className={translateMap[placement][2]} >
         {children}
