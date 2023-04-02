@@ -1,6 +1,7 @@
 import type { FC, FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Icon } from '../components/Icon'
+import { Input } from '../components/Input'
 import { TopNav } from '../components/TopNav'
 import { useTitle } from '../hooks/useTitle'
 import { ajax } from '../lib/ajax'
@@ -42,21 +43,10 @@ export const SignIn: FC<Props> = ({ title }) => {
         <h1 text-32px text="#7878FF" font-bold>山竹记账</h1>
       </div>
       <form j-form onSubmit={onSubmit}>
-        <div>
-          <span j-form-label>邮箱地址{error.email?.[0] && <span text-red >{error.email[0]}</span>}</span>
-          <input value={data.email} type="text" placeholder='请输入邮箱，再点击发送验证码'j-form-input
-            onChange={e => setData({ email: e.target.value })}
-          />
-        </div>
-        <div>
-          <span j-form-label>验证码{error.code?.[0] && <span text-red>{error.code[0]}</span>}</span>
-          <div flex gap-x-16px>
-            <input value={data.code} type="text" placeholder='六位数字' w-128px j-form-input
-              onChange={e => setData({ code: e.target.value })}
-            />
-            <button j-btn>发送验证码</button>
-          </div>
-        </div>
+        <Input label="邮箱地址" placeholder='请输入邮箱，再点击发送验证码' error={error.email?.[0]}
+          value={data.email} onChange={value => setData({ email: value })} />
+        <Input type="sms_code" label="验证码" error={error.code?.[0]}
+          value={data.code} onChange={value => setData({ code: value })} />
         <div mt-60px>
           <button type="submit" j-btn>登录</button>
         </div>
