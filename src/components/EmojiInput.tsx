@@ -23,7 +23,7 @@ export const EmojiInput: FC<Props> = (props) => {
 					))
 				}
 			</div>
-			<div h-400px text-24px text-center leading-34px grid grid-cols="[repeat(auto-fit,34px)]" grid-rows="[repeat(auto-fit,34px)]"
+			<div h-300px text-24px text-center leading-34px grid grid-cols="[repeat(auto-fit,34px)]" grid-rows="[repeat(auto-fit,34px)]"
 				justify-center overflow-auto p-b-16px
 			>
 				{

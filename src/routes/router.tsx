@@ -10,7 +10,8 @@ import { Home } from '../pages/Home'
 import { ItemsPage } from '../pages/ItemsPage'
 import { SignIn } from '../pages/SignIn'
 import { ItemsNewPage } from '../pages/ItemsNewPage'
-import { TagsNewPage } from '../pages/TagsNewPage'
+import { TagsNewPage } from '../pages/tags/TagsNewPage'
+import { TagsEditPage } from '../pages/tags/TagsEditPage'
 
 export const router = createBrowserRouter([
   {
@@ -36,5 +37,6 @@ export const router = createBrowserRouter([
   { path: '/export', element: <div>导出数据</div> },
   { path: '/tags', element: <div>自定义标签</div> },
   { path: '/tags/new', element: <TagsNewPage /> },
+  { path: '/tags/:id', element: <TagsEditPage /> },
   { path: '/noty', element: <div>记账提醒</div> },
 ])
