@@ -6,7 +6,7 @@ import { TopNav } from '../components/TopNav'
 import { useTitle } from '../hooks/useTitle'
 import { ajax } from '../lib/ajax'
 import { hasError, validate } from '../lib/validate'
-import { useSignInStore } from '../stores/useSignIdStore'
+import { useSignInStore } from '../stores/useSignInStore'
 
 interface Props {
   title?: string
