@@ -12,6 +12,7 @@ import { SignIn } from '../pages/SignIn'
 import { ItemsNewPage } from '../pages/ItemsNewPage'
 import { TagsNewPage } from '../pages/tags/TagsNewPage'
 import { TagsEditPage } from '../pages/tags/TagsEditPage'
+import { StatisticsPage } from '../pages/StatisticsPage'
 
 export const router = createHashRouter([
   {
@@ -38,5 +39,6 @@ export const router = createHashRouter([
   { path: '/tags', element: <div>自定义标签</div> },
   { path: '/tags/new', element: <TagsNewPage /> },
   { path: '/tags/:id', element: <TagsEditPage /> },
+  { path: '/statistics', element: <StatisticsPage /> },
   { path: '/noty', element: <div>记账提醒</div> },
 ])

@@ -4,10 +4,10 @@ import { AddItemFloatButton } from '../../components/AddItemFloatButton'
 import { TopNav } from '../../components/TopNav'
 import { useTopMenuStore } from '../../stores/useTopMenuStore'
 import { Icon } from '../../components/Icon'
-import type { TimeRange } from './components/TimeRangePicker'
+import type { TimeRange } from '../../components/TimeRangePicker'
+import { TimeRangePicker } from '../../components/TimeRangePicker'
 import { ItemsList } from './components/ItemsList'
 import { ItemsSummary } from './components/ItemsSummary'
-import { TimeRangePicker } from './components/TimeRangePicker'
 import { TopMenu } from './components/TopMenu'
 
 export const ItemsPage: FC = () => {
