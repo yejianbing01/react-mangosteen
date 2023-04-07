@@ -6,6 +6,7 @@ import { svgsprites } from './vite_plugins/svgsprites'
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => ({
+  base: '/react-mangosteen',
   define: {
     isDev: command === 'serve'
   },
