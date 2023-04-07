@@ -47,7 +47,7 @@ export const StatisticsPage: FC = () => {
 				<TopNav title='统计图表' icon={<Icon name="back" className='w-24px h-24px' />} />
 				<TimeRangePicker selected={itemsRange} onChange={selected => setItemsRange(selected)} />
 			</div>
-			<LineChart className='h-400px' items={items} />
+			<LineChart className='h-120px' items={items} />
 		</div>
   )
 }

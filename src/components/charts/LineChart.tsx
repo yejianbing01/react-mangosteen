@@ -15,22 +15,32 @@ export const LineChart: FC<Props> = (props) => {
   useEffect(() => {
     if (!chartRef.current) { return }
     const myChart = echarts.init(chartRef.current)
-    myChart.setOption({
+    const options: echarts.EChartsOption = {
       xAxis: {
         type: 'category',
-        data: xData
+        data: xData,
+        axisLabel: {
+          formatter: (value: string) => value.slice(value.indexOf('-') + 1)
+        }
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+          show: false
+        }
       },
       grid: {
         containLabel: true,
-        left: '0%',
-        right: '0%',
-        top: '0%',
+        left: '10',
+        right: '10',
+        top: '20',
         bottom: '0%'
       },
       color: ['#5a72e0'],
+      tooltip: {
+        show: true,
+        trigger: 'axis'
+      },
       series: [
         {
           data: yData,
@@ -38,7 +48,8 @@ export const LineChart: FC<Props> = (props) => {
           smooth: true
         }
       ]
-    })
+    }
+    myChart.setOption(options)
   }, [])
 
   return (
