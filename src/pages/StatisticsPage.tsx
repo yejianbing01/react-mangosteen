@@ -5,6 +5,7 @@ import { TopNav } from '../components/TopNav'
 import type { TimeRange } from '../components/TimeRangePicker'
 import { TimeRangePicker } from '../components/TimeRangePicker'
 import { LineChart } from '../components/charts/LineChart'
+import { PieChart } from '../components/charts/PieChart'
 
 export const StatisticsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
@@ -40,14 +41,20 @@ export const StatisticsPage: FC = () => {
     { date: '2000-01-29', value: 155000 },
     { date: '2000-01-31', value: 10000 },
   ].map(item => ({ x: item.date, y: item.value / 100 }))
+  const itemsPieChart = [
+    { tag: { name: '吃饭', sign: '😨' }, amount: 10000 },
+    { tag: { name: '打车', sign: '🥱' }, amount: 20000 },
+    { tag: { name: '买皮肤', sign: '💖' }, amount: 68800 },
+  ].map(item => ({ name: item.tag.name, value: item.amount / 100 }))
 
   return (
 		<div>
 			<div j-bg>
 				<TopNav title='统计图表' icon={<Icon name="back" className='w-24px h-24px' />} />
 				<TimeRangePicker selected={itemsRange} onChange={selected => setItemsRange(selected)} />
-			</div>
-			<LineChart className='h-120px' items={items} />
+      </div>
+      <LineChart className='h-120px' items={items} />
+      <PieChart className='h-300px my-16px' items={itemsPieChart} />
 		</div>
   )
 }

@@ -7,14 +7,17 @@ interface Props {
   items: { x: string; y: number }[]
 }
 export const LineChart: FC<Props> = (props) => {
-  const chartRef = useRef(null)
   const { className, items } = props
+  const chartRef = useRef<HTMLDivElement>(null)
+  const initializedRef = useRef(false)
   const xData = items.map(item => item.x)
   const yData = items.map(item => item.y)
 
   useEffect(() => {
     if (!chartRef.current) { return }
+    if (initializedRef.current) { return }
     const myChart = echarts.init(chartRef.current)
+    initializedRef.current = true
     const options: echarts.EChartsOption = {
       xAxis: {
         type: 'category',
@@ -31,8 +34,8 @@ export const LineChart: FC<Props> = (props) => {
       },
       grid: {
         containLabel: true,
-        left: '10',
-        right: '10',
+        left: '16',
+        right: '16',
         top: '20',
         bottom: '0%'
       },
