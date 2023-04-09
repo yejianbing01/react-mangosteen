@@ -6,6 +6,7 @@ import type { TimeRange } from '../components/TimeRangePicker'
 import { TimeRangePicker } from '../components/TimeRangePicker'
 import { LineChart } from '../components/charts/LineChart'
 import { PieChart } from '../components/charts/PieChart'
+import { RankChart } from '../components/charts/RankChart'
 
 export const StatisticsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
@@ -46,6 +47,11 @@ export const StatisticsPage: FC = () => {
     { tag: { name: '打车', sign: '🥱' }, amount: 20000 },
     { tag: { name: '买皮肤', sign: '💖' }, amount: 68800 },
   ].map(item => ({ name: item.tag.name, value: item.amount / 100 }))
+  const itemsRankChart = [
+    { tag: { name: '吃饭', sign: '😨' }, amount: 10000 },
+    { tag: { name: '打车', sign: '🥱' }, amount: 20000 },
+    { tag: { name: '买皮肤', sign: '💖' }, amount: 68800 },
+  ].map(item => ({ name: item.tag.name, sign: item.tag.sign, value: item.amount / 100 }))
 
   return (
 		<div>
@@ -55,6 +61,7 @@ export const StatisticsPage: FC = () => {
       </div>
       <LineChart className='h-120px' items={items} />
       <PieChart className='h-300px my-16px' items={itemsPieChart} />
+      <RankChart items={itemsRankChart}/>
 		</div>
   )
 }
