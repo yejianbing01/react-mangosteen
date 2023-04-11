@@ -7,9 +7,11 @@ import { TimeRangePicker } from '../components/TimeRangePicker'
 import { LineChart } from '../components/charts/LineChart'
 import { PieChart } from '../components/charts/PieChart'
 import { RankChart } from '../components/charts/RankChart'
+import { Select } from '../components/Select'
 
 export const StatisticsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
+  const [kind, setKind] = useState<Kind>('expenses')
   const items = [
     { date: '2000-01-01', value: 15000 },
     { date: '2000-01-02', value: 25000 },
@@ -52,12 +54,22 @@ export const StatisticsPage: FC = () => {
     { tag: { name: '打车', sign: '🥱' }, amount: 20000 },
     { tag: { name: '买皮肤', sign: '💖' }, amount: 68800 },
   ].map(item => ({ name: item.tag.name, sign: item.tag.sign, value: item.amount / 100 }))
+  const selectItems: { text: string; value: Kind }[] = [
+    { text: '支出', value: 'expenses' },
+    { text: '收入', value: 'income' },
+  ]
 
   return (
 		<div>
 			<div j-bg>
 				<TopNav title='统计图表' icon={<Icon name="back" className='w-24px h-24px' />} />
 				<TimeRangePicker selected={itemsRange} onChange={selected => setItemsRange(selected)} />
+      </div>
+      <div h-48px text-16px p-x-16px pt-16px flex items-center gap-x-8px>
+        <span>类型</span>
+        <div grow-1 h-full>
+          <Select name='kind' items={selectItems} value={kind} onChange={kind => setKind(kind)} />
+        </div>
       </div>
       <LineChart className='h-120px' items={items} />
       <PieChart className='h-300px my-16px' items={itemsPieChart} />
