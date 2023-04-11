@@ -33,6 +33,16 @@ export const SignIn: FC<Props> = ({ title }) => {
     }
   }
 
+  const onClick = () => {
+    const error = validate({ email: data.email }, [
+      { key: 'email', type: 'required', message: '邮箱不能为空' },
+      { key: 'email', type: 'pattern', regex: /^.+@.+$/, message: '邮箱格式不正确' },
+    ])
+    setError(error)
+    if (hasError(error)) { return }
+    ajax.post('api/v1/validation_codes', { email: data.email })
+  }
+
   return (
     <>
   		<div j-bg>
@@ -43,10 +53,10 @@ export const SignIn: FC<Props> = ({ title }) => {
         <h1 text-32px text="#7878FF" font-bold>山竹记账</h1>
       </div>
       <form j-form onSubmit={onSubmit}>
-        <Input label="邮箱地址" placeholder='请输入邮箱，再点击发送验证码' error={error.email?.[0]}
+        <Input type='text' label="邮箱地址" placeholder='请输入邮箱，再点击发送验证码' error={error.email?.[0]}
           value={data.email} onChange={value => setData({ email: value })} />
         <Input type="sms_code" label="验证码" error={error.code?.[0]}
-          value={data.code} onChange={value => setData({ code: value })} />
+          value={data.code} onChange={value => setData({ code: value })} onClick={onClick} />
         <div mt-60px>
           <button type="submit" j-btn>登录</button>
         </div>
