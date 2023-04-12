@@ -70,3 +70,9 @@
 10. [swr](https://github.com/vercel/swr)
 
 11. ***bug***: 1.transform 导致fixed失败 2.cursor-pointer导致点击出现蓝色闪烁
+
+12. vite版本升级
+```sh
+# 查询npm依赖包信息
+npm info vite versions
+```
