@@ -49,7 +49,7 @@ export const TagsForm: FC<Props> = ({ type }) => {
 
   return (
 		<form j-form py-16px onSubmit={onSubmit} >
-			<Input label='标签名' placeholder='请输入标签名' value={data.name} error={error.name?.[0]} onChange={name => setData({ name })} />
+			<Input type="text" label='标签名' placeholder='请输入标签名' value={data.name} error={error.name?.[0]} onChange={name => setData({ name })} />
 			<Input
 				label={
 					<div className="flex items-center">

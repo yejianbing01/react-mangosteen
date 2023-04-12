@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { useEffect, useState } from 'react'
 
 interface Props {
-  value: string
+  value?: string
   onChange: (value: string) => void
   request: () => Promise<unknown>
   placeholder?: string

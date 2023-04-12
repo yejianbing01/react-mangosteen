@@ -3,7 +3,7 @@ import { SmsCodeInput } from './SmsCodeInput'
 import { EmojiInput } from './EmojiInput'
 
 type Props = {
-  value: string
+  value?: string
   onChange: (value: string) => void
   label?: string | ReactNode
   placeholder?: string
