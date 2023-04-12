@@ -1,16 +1,17 @@
 import type { FC, ReactNode } from 'react'
+import { SmsCodeInput } from './SmsCodeInput'
 import { EmojiInput } from './EmojiInput'
 
 type Props = {
+  value: string
+  onChange: (value: string) => void
   label?: string | ReactNode
-  value?: string
   placeholder?: string
-  onChange?: (value: string) => void
   error?: string
 } & (
   | { type: 'text' }
   | { type: 'emoji' }
-  | { type: 'sms_code'; onClick: () => void }
+  | { type: 'sms_code'; request: () => Promise<unknown> }
 )
 
 export const Input: FC<Props> = (props) => {
@@ -28,11 +29,7 @@ export const Input: FC<Props> = (props) => {
 
     if (type === 'sms_code') {
       return (
-        <div flex gap-x-8px>
-         <input value={value} type="text" placeholder='六位数字' w-128px j-form-input
-          onChange={e => onChange?.(e.target.value)}/>
-          <button type="button" onClick={props.onClick} j-btn>发送验证码</button>
-        </div>
+        <SmsCodeInput value={value} onChange={onChange} request={props.request} />
       )
     }
   }

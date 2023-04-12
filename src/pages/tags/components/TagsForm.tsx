@@ -1,7 +1,7 @@
 import type { FC, FormEventHandler } from 'react'
 import { useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { Input } from '../../../components/Input'
+import { Input } from '../../../components/Input/Input'
 import { hasError, validate } from '../../../lib/validate'
 import { useCreateTagStore } from '../../../stores/useCreateTagStore'
 

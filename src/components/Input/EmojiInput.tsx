@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { useState } from 'react'
-import { emojis } from '../lib/emojis'
+import { emojis } from '../../lib/emojis'
 
 interface Props {
   value?: string
