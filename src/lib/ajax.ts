@@ -2,8 +2,15 @@ import axios from 'axios'
 
 axios.defaults.baseURL = isDev ? 'http://121.196.236.94:8080/' : 'https://121.196.236.94:8080/'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
-axios.defaults.headers.Authorization = `Bearer ${localStorage.getItem('jwt')}`
 axios.defaults.timeout = 10000
+
+axios.interceptors.request.use((config) => {
+  const jwt = localStorage.getItem('jwt')
+  if (jwt) {
+    config.headers.Authorization = `Bearer ${jwt}`
+  }
+  return config
+})
 
 export const ajax = {
   get: <T>(path: string) => {
