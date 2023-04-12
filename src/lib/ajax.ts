@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = isDev ? 'http://121.196.236.94:8080/' : 'http://121.196.236.94:8080/'
+axios.defaults.baseURL = isDev ? 'http://121.196.236.94:8080/' : 'https://121.196.236.94:8080/'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.Authorization = `Bearer ${localStorage.getItem('jwt')}`
 axios.defaults.timeout = 10000
