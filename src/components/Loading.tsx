@@ -15,7 +15,7 @@ const Div = styled.div`
   }
 
   svg {
-    animation: spin 3s linear infinite;
+    animation: spin 1s linear infinite;
   }
 `
 interface Props {

@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import { useState } from 'react'
 import c from 'classnames'
 import { animated, useSpring } from '@react-spring/web'
@@ -7,8 +7,9 @@ interface Props {
   isVisible?: boolean
   className?: string
   onClick?: (e: React.MouseEvent) => void
+  children?: ReactNode
 }
-export const Mask: FC<Props> = ({ isVisible, className, onClick }) => {
+export const Mask: FC<Props> = ({ isVisible, className, onClick, children }) => {
   const [maskVisible, setMaskVisible] = useState(isVisible)
 
   const maskStyle = useSpring({
@@ -31,6 +32,8 @@ export const Mask: FC<Props> = ({ isVisible, className, onClick }) => {
       className={c(className, 'bg-black:75')}
       onClick={onClick}
       style={{ ...maskStyle, visibility: maskVisible ? 'visible' : 'hidden' }}
-    />
+    >
+      {children}
+    </animated.div>
   )
 }
