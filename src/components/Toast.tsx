@@ -23,7 +23,7 @@ export const Toast = {
 
   hide: () => {
     if (!toastWrapper) { return }
-    toastRoot.unmount()
+    toastRoot.render('')
   }
 
 }
