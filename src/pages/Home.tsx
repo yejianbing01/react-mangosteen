@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import useSWR from 'swr'
-import { Navigate } from 'react-router-dom'
 import pig from '../assets/images/pig.svg'
 import { ajax } from '../lib/ajax'
 import { useTitle } from '../hooks/useTitle'
@@ -33,7 +32,7 @@ export const Home: FC<Props> = (props) => {
   }
 
   if (itemsData?.resources && itemsData?.resources.length > 0) {
-    return <Navigate to={'/items'} />
+    // return <Navigate to={'/items'} />
   }
 
   return (

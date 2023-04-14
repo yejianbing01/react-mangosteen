@@ -76,3 +76,8 @@
 # 查询npm依赖包信息
 npm info vite versions
 ```
+13. axios封装，拦截器展示loading
+
+14. react-router load做路由守卫
+
+15. 使用 swr preload 预请求接口

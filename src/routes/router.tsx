@@ -1,4 +1,4 @@
-import { createHashRouter } from 'react-router-dom'
+import { Navigate, createHashRouter } from 'react-router-dom'
 import ErrorPage from '../pages/ErrorPage'
 import { Root } from '../components/Root'
 import { WelcomeLayout } from '../layouts/WelcomeLayout'
@@ -13,6 +13,14 @@ import { ItemsNewPage } from '../pages/ItemsNewPage'
 import { TagsNewPage } from '../pages/tags/TagsNewPage'
 import { TagsEditPage } from '../pages/tags/TagsEditPage'
 import { StatisticsPage } from '../pages/StatisticsPage'
+import { ajax } from '../lib/ajax'
+
+const itemsPageLoader = async () => {
+  const res = await ajax.get<Resources<Item>>('/api/v1/items?page=1')
+  if (!res.data.resources.length) {
+    throw new Error('没有数据')
+  }
+}
 
 export const router = createHashRouter([
   {
@@ -31,7 +39,12 @@ export const router = createHashRouter([
     ]
   },
   { path: '/home', element: <Home title={'首页'} /> },
-  { path: '/items', element: <ItemsPage /> },
+  {
+    path: '/items',
+    element: <ItemsPage />,
+    errorElement: <Navigate to={'/home'} />,
+    loader: itemsPageLoader
+  },
   { path: '/items/new', element: <ItemsNewPage /> },
   { path: '/sign_in', element: <SignIn title={'登录'} /> },
   { path: '/chart', element: <div>统计图表</div> },
