@@ -17,9 +17,8 @@ import { ajax } from '../lib/ajax'
 
 const itemsPageLoader = async () => {
   const res = await ajax.get<Resources<Item>>('/api/v1/items?page=1')
-  if (!res.data.resources.length) {
-    throw new Error('没有数据')
-  }
+  if (!res.data.resources.length) { throw new Error('没有数据') }
+  throw new Error('没有数据')
 }
 
 export const router = createHashRouter([
@@ -42,7 +41,7 @@ export const router = createHashRouter([
   {
     path: '/items',
     element: <ItemsPage />,
-    errorElement: <Navigate to={'/home'} />,
+    errorElement: <Navigate to={'/home'} replace />,
     loader: itemsPageLoader
   },
   { path: '/items/new', element: <ItemsNewPage /> },

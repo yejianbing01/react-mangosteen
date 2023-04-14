@@ -16,7 +16,7 @@ interface SignInData {
 export const useSignInStore = create<SignInData>(set => ({
   data: {
     email: 'yejb_01@163.com',
-    code: '751507'
+    code: '123456'
   },
   error: {
     email: [],

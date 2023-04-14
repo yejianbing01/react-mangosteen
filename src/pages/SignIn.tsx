@@ -33,7 +33,7 @@ export const SignIn: FC<Props> = ({ title }) => {
     ajax.post<{ jwt: string }>('/api/v1/session', data)
       .then((res) => {
         localStorage.setItem('jwt', res.data.jwt)
-        nav('/home')
+        nav('/items')
       })
       .catch((error: AxiosError<{ errors: FormError<typeof data> }>) => setError(error.response?.data.errors ?? {}))
   }
