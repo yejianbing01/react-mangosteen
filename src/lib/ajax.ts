@@ -2,6 +2,12 @@ import type { AxiosError } from 'axios'
 import axios from 'axios'
 import { Toast } from '../components/Toast'
 
+const replaceHash = (url: string) => {
+  const curHash = window.location.hash
+  const newHref = `${window.location.href.toString().replace(curHash, '')}#${url}`
+  window.location.replace(newHref)
+}
+
 axios.defaults.baseURL = isDev ? 'http://121.196.236.94:8080/' : 'https://121.196.236.94:8080/'
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -25,7 +31,7 @@ axios.interceptors.response.use((value) => {
   let title = error.message
   if (error.response?.status === 401) {
     title = '信息异常，请重新登录'
-    window.location.hash = '/sign_in'
+    replaceHash('/sign_in')
   }
   Toast.info(title, 1000)
   return Promise.reject(error)
