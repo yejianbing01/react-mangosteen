@@ -31,7 +31,7 @@ axios.interceptors.response.use((value) => {
   let title = error.message
   if (error.response?.status === 401) {
     title = '信息异常，请重新登录'
-    replaceHash('/sign_in')
+    replaceHash(`/sign_in?from=${window.location.hash}`)
   }
   Toast.info(title, 1000)
   return Promise.reject(error)

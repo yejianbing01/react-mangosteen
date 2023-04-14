@@ -81,3 +81,5 @@ npm info vite versions
 14. react-router load做路由守卫
 
 15. 使用 swr preload 预请求接口
+
+16. 使用react-use库读取hash值

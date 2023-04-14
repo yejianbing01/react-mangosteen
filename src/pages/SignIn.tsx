@@ -1,5 +1,4 @@
 import type { FC, FormEventHandler } from 'react'
-import { useNavigate } from 'react-router-dom'
 import type { AxiosError } from 'axios'
 import { Icon } from '../components/Icon'
 import { Input } from '../components/Input/Input'
@@ -9,6 +8,7 @@ import { ajax } from '../lib/ajax'
 import type { FormError } from '../lib/validate'
 import { hasError, validate } from '../lib/validate'
 import { useSignInStore } from '../stores/useSignInStore'
+import { useHashSearchParams } from '../hooks/useHashSearchParams'
 
 interface Props {
   title?: string
@@ -16,7 +16,7 @@ interface Props {
 export const SignIn: FC<Props> = ({ title }) => {
   useTitle(title)
   const { data, setData, error, setError } = useSignInStore()
-  const nav = useNavigate()
+  const [hashSearchParams] = useHashSearchParams()
 
   /** 登录 */
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -33,7 +33,7 @@ export const SignIn: FC<Props> = ({ title }) => {
     ajax.post<{ jwt: string }>('/api/v1/session', data)
       .then((res) => {
         localStorage.setItem('jwt', res.data.jwt)
-        nav('/items')
+        window.location.hash = hashSearchParams.from || '/items'
       })
       .catch((error: AxiosError<{ errors: FormError<typeof data> }>) => setError(error.response?.data.errors ?? {}))
   }
