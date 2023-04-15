@@ -6,13 +6,14 @@ import { Icon } from '../../components/Icon'
 import { Tabs } from '../../components/Tabs'
 import { TopNav } from '../../components/TopNav'
 import { time } from '../../lib/time'
+import { useCreateItemStore } from '../../stores/useCreateItemStore'
 import { DateAndAmount } from './DateAndAmount'
 import { Tags } from './Tags'
 
 export type ItemKind = 'expenses' | 'income'
 
 export const ItemsNewPage: FC = () => {
-  const [type, setType] = useState<ItemKind>('expenses')
+  const { data, setData } = useCreateItemStore()
   const [datePickVisible, setDatePickVisible] = useState(false)
   const [date, setDate] = useState(time().format())
 
@@ -25,7 +26,7 @@ export const ItemsNewPage: FC = () => {
     <div flex flex-col h-screen>
 			<TopNav title='记一笔' icon={<Icon name='back' />} className="j-bg grow-0 shrink-0" />
       <div grow-1 shrink-1 overflow-hidden>
-    		<Tabs tabItems={items} value={type} onChange={value => setType(value)}
+    		<Tabs tabItems={items} value={data.kind} onChange={value => setData({ kind: value })}
     			className="children-grow-1 text-center bg-[#8f4cd7]"
         />
       </div>

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 interface Props<T> {
   tabItems: { key: T; text: string; element?: ReactNode }[]
-  value: T
+  value?: T
   onChange: (value: T) => void
   className?: string
 }
