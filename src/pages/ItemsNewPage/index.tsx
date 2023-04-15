@@ -18,8 +18,8 @@ export const ItemsNewPage: FC = () => {
   const [date, setDate] = useState(time().format())
 
   const items: { key: ItemKind; text: string; element: ReactNode }[] = [
-    { key: 'expenses', text: '支出', element: <Tags kind='expenses'/> },
-    { key: 'income', text: '收入', element: <Tags kind='income'/> },
+    { key: 'expenses', text: '支出', element: <Tags kind='expenses' value={data.tag_ids} onChange={tag_ids => setData({ tag_ids })} /> },
+    { key: 'income', text: '收入', element: <Tags kind='income' value={data.tag_ids} onChange={tag_ids => setData({ tag_ids })} /> },
   ]
 
   return (

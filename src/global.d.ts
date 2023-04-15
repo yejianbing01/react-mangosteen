@@ -26,7 +26,7 @@ interface Item {
   user_id: string
   amount: number
   note?: string
-  tag_ids: number[]
+  tag_ids: string[]
   happen_at: string
   created_at: string
   updated_at: string
@@ -40,7 +40,7 @@ interface Tag {
   user_id: string
   name: string
   sign: string
-  deleted_at: string
   created_at: string
   updated_at: string
+  deleted_at: string | null
 }
