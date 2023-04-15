@@ -1,6 +1,4 @@
 import { Navigate, createHashRouter } from 'react-router-dom'
-import ErrorPage from '../pages/ErrorPage'
-import { Root } from '../components/Root'
 import { WelcomeLayout } from '../layouts/WelcomeLayout'
 import { Welcome1 } from '../pages/Welcome1'
 import { Welcome2 } from '../pages/Welcome2'
@@ -14,11 +12,18 @@ import { TagsNewPage } from '../pages/tags/TagsNewPage'
 import { TagsEditPage } from '../pages/tags/TagsEditPage'
 import { StatisticsPage } from '../pages/StatisticsPage'
 import { ajax } from '../lib/ajax'
+import ErrorPage from '../pages/ErrorPage'
+import { Root } from '../components/Root'
 
 const itemsPageLoader = async () => {
   const res = await ajax.get<Resources<Item>>('/api/v1/items?page=1')
   if (!res.data.resources.length) { throw new Error('没有数据') }
-  throw new Error('没有数据')
+  return res.data
+}
+
+const rootLoader = async () => {
+  const res = await ajax.get<Resource<User>>('/api/v1/me')
+  return res.data
 }
 
 export const router = createHashRouter([
@@ -27,30 +32,37 @@ export const router = createHashRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: '/welcome',
-    element: <WelcomeLayout />,
-    children: [
-      { path: '1', element: <Welcome1 /> },
-      { path: '2', element: <Welcome2 /> },
-      { path: '3', element: <Welcome3 /> },
-      { path: '4', element: <Welcome4 /> },
-    ]
-  },
-  { path: '/home', element: <Home title={'首页'} /> },
-  {
-    path: '/items',
-    element: <ItemsPage />,
-    errorElement: <Navigate to={'/home'} replace />,
-    loader: itemsPageLoader
-  },
-  { path: '/items/new', element: <ItemsNewPage /> },
   { path: '/sign_in', element: <SignIn title={'登录'} /> },
-  { path: '/chart', element: <div>统计图表</div> },
-  { path: '/export', element: <div>导出数据</div> },
-  { path: '/tags', element: <div>自定义标签</div> },
-  { path: '/tags/new', element: <TagsNewPage /> },
-  { path: '/tags/:id', element: <TagsEditPage /> },
-  { path: '/statistics', element: <StatisticsPage /> },
-  { path: '/noty', element: <div>记账提醒</div> },
+  {
+    path: '/',
+    errorElement: <ErrorPage />,
+    loader: rootLoader,
+    children: [
+      {
+        path: '/welcome',
+        element: <WelcomeLayout />,
+        children: [
+          { path: '1', element: <Welcome1 /> },
+          { path: '2', element: <Welcome2 /> },
+          { path: '3', element: <Welcome3 /> },
+          { path: '4', element: <Welcome4 /> },
+        ]
+      },
+      { path: '/home', element: <Home title={'首页'} /> },
+      {
+        path: '/items',
+        element: <ItemsPage />,
+        errorElement: <Navigate to={'/home'} replace />,
+        loader: itemsPageLoader
+      },
+      { path: '/items/new', element: <ItemsNewPage /> },
+      { path: '/chart', element: <div>统计图表</div> },
+      { path: '/export', element: <div>导出数据</div> },
+      { path: '/tags', element: <div>自定义标签</div> },
+      { path: '/tags/new', element: <TagsNewPage /> },
+      { path: '/tags/:id', element: <TagsEditPage /> },
+      { path: '/statistics', element: <StatisticsPage /> },
+      { path: '/noty', element: <div>记账提醒</div> },
+    ]
+  }
 ])

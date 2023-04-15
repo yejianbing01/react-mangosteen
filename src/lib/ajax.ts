@@ -2,9 +2,16 @@ import type { AxiosError } from 'axios'
 import axios from 'axios'
 import { Toast } from '../components/Toast'
 
-const replaceHash = (url: string) => {
+const replaceHash = () => {
   const curHash = window.location.hash
-  const newHref = `${window.location.href.toString().replace(curHash, '')}#${url}`
+  const newHash = curHash.includes('/sign_in')
+    ? '/sign_in'
+    : (curHash.includes('from')
+        ? curHash
+        : curHash ? `/sign_in?from=${curHash}` : '/sign_in'
+      )
+
+  const newHref = `${window.location.href.toString().replace(curHash, '')}#${newHash}`
   window.location.replace(newHref)
 }
 
@@ -31,7 +38,7 @@ axios.interceptors.response.use((value) => {
   let title = error.message
   if (error.response?.status === 401) {
     title = '信息异常，请重新登录'
-    replaceHash(`/sign_in?from=${window.location.hash}`)
+    replaceHash()
   }
   Toast.info(title, 1000)
   return Promise.reject(error)
