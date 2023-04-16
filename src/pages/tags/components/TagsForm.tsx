@@ -1,9 +1,10 @@
 import type { FC, FormEventHandler } from 'react'
 import { useEffect } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Input } from '../../../components/Input/Input'
 import { hasError, validate } from '../../../lib/validate'
 import { useCreateTagStore } from '../../../stores/useCreateTagStore'
+import { ajax } from '../../../lib/ajax'
 
 interface Props {
   type: 'create' | 'update'
@@ -11,12 +12,14 @@ interface Props {
 export const TagsForm: FC<Props> = ({ type }) => {
   const { data, error, setData, setError } = useCreateTagStore()
   const [URLSearchParam] = useSearchParams()
+  const kind = URLSearchParam.get('kind')
   const params = useParams()
+  const tagId = params.id
+  const nav = useNavigate()
 
   useEffect(() => {
     if (type === 'update') { return }
 
-    const kind = URLSearchParam.get('kind')
     if (!kind) {
       throw new Error('kind必填')
     }
@@ -27,13 +30,13 @@ export const TagsForm: FC<Props> = ({ type }) => {
   }, [])
 
   useEffect(() => {
-    if (type === 'create') { return }
-    const tagId = params.id
-    // 发送ajax请求查询标签详情
+    if (type === 'create') {
+      // 发送ajax请求查询标签详情
+    }
     // setData({})
   }, [])
 
-  const onSubmit: FormEventHandler = (e) => {
+  const onSubmit: FormEventHandler = async (e) => {
     e.preventDefault()
     const error = validate(data, [
       { key: 'kind', type: 'required', message: '标签类型必填' },
@@ -44,6 +47,9 @@ export const TagsForm: FC<Props> = ({ type }) => {
     setError(error)
     if (!hasError(error)) {
       // 发送ajax请求
+      const res = await ajax.post<Resource<Tag>>('/api/v1/tags1', data)
+      setData(res.data.resource)
+      nav(`/items/new?kind=${kind}`)
     }
   }
 

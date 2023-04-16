@@ -38,18 +38,28 @@ axios.interceptors.request.use((config: AjaxInternalAxiosRequestConfig) => {
   config.custom?.showLoading && Toast.loading()
   return config
 }, (error: AxiosError) => {
-  Toast.info(error.message, 1000)
+  let title = error.message
+  if (error.status === 404) {
+    title = '网络异常，请稍后再试'
+  } else {
+    title = '未知异常'
+  }
+  Toast.info(title, 1000)
   return Promise.reject(error)
 })
 
 axios.interceptors.response.use((value) => {
   Toast.hide()
   return value
-}, (error: AxiosError<{ errors: {} }>) => {
+}, (error: AxiosError<{ errors: { [propName: string]: [] } }>) => {
   let title = error.message
   if (error.response?.status === 401) {
     title = '信息异常，请重新登录'
     replaceHash()
+  } else if (error.response?.status === 404) {
+    title = '网络异常，请稍后再试'
+  } else if (error.response?.status === 422) {
+    title = Object.values(error.response.data.errors).flat()[0]
   }
   Toast.info(title, 1000)
   return Promise.reject(error)
