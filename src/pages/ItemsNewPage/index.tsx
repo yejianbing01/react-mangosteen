@@ -1,20 +1,18 @@
 import type { FC, ReactNode } from 'react'
 import { useState } from 'react'
-import { DatePicker } from '../../components/DatePicker'
-import { Drawer } from '../../components/Drawer'
 import { Icon } from '../../components/Icon'
 import { Tabs } from '../../components/Tabs'
 import { TopNav } from '../../components/TopNav'
-import { time } from '../../lib/time'
 import { useCreateItemStore } from '../../stores/useCreateItemStore'
+import { time } from '../../lib/time'
 import { DateAndAmount } from './DateAndAmount'
 import { Tags } from './Tags'
+import { ItemDate } from './ItemDate'
 
 export type ItemKind = 'expenses' | 'income'
 
 export const ItemsNewPage: FC = () => {
   const { data, setData } = useCreateItemStore()
-  const [datePickVisible, setDatePickVisible] = useState(false)
   const [date, setDate] = useState(time().format())
 
   const items: { key: ItemKind; text: string; element: ReactNode }[] = [
@@ -30,17 +28,7 @@ export const ItemsNewPage: FC = () => {
     			className="children-grow-1 text-center bg-[#8f4cd7]"
         />
       </div>
-      <DateAndAmount className='grow-0 shrink-0' onDateClick={() => setDatePickVisible(true)} date={date} />
-      <Drawer placement="bottom" visible={datePickVisible} onClose={() => setDatePickVisible(false)} >
-        <DatePicker
-          value={new Date(date)}
-          onCancel={() => setDatePickVisible(false)}
-          onConfirm={(time) => {
-            setDate(time.format())
-            setDatePickVisible(false)
-          }}
-        />
-      </Drawer>
+      <DateAndAmount className='grow-0 shrink-0' itemDate={<ItemDate date={date} setDate={setDate} />} />
     </div>
   )
 }

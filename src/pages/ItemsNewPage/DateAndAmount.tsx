@@ -1,13 +1,12 @@
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import { useState } from 'react'
-import { Icon } from '../../components/Icon'
 
 interface Props {
-  date?: string
   className?: string
-  onDateClick?: () => void
+  itemDate: ReactNode
 }
-export const DateAndAmount: FC<Props> = ({ date, className, onDateClick }) => {
+export const DateAndAmount: FC<Props> = (props) => {
+  const { className, itemDate } = props
   const [output, setOutput] = useState('0')
 
   const append = (char: string) => {
@@ -37,8 +36,7 @@ export const DateAndAmount: FC<Props> = ({ date, className, onDateClick }) => {
   return (
 		<div className={className} >
 			<div flex p-t-15px p-b-16px px-16px border-t-1px border-t="#ddd" gap-x-8px items-center>
-				<Icon name="calendar" className="w-24px h-24px grow-0 shrink-0" onClick={onDateClick} />
-				<span grow-0 shrink-0 text-12px color="#999" onClick={onDateClick}>{date}</span>
+        {itemDate}
 				<code grow-1 shrink-1 text-right color="#53A867">{output}</code>
 			</div>
 			<div py-1px grid grid-rows="[repeat(4,56px)]" grid-cols-4 bg="#ddd" gap-1px children-bg-white >
