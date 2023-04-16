@@ -13,7 +13,7 @@ export const ItemsList: FC = () => {
   const { data, error, isLoading, isValidating, size, setSize } = useSWRInfinite(
     (pageIndex, previousPageData) => {
       if (previousPageData && previousPageData.resources.length < 10) { return null }
-      return `/api/v1/items?page=${pageIndex + 1}&limit=10`
+      return `/api/v1/items?page=${pageIndex + 1}&pre_page=20`
     }, async key => (await axios.get<Resources<Item>>(key)).data
   )
 

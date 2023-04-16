@@ -1,4 +1,4 @@
-import type { AxiosError } from 'axios'
+import type { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
 import { Toast } from '../components/Toast'
 
@@ -19,12 +19,22 @@ axios.defaults.baseURL = isDev ? 'http://121.196.236.94:8080/' : 'https://121.19
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-axios.interceptors.request.use((config) => {
+interface AjaxRequestConfig extends AxiosRequestConfig {
+  custom?: {
+    showLoading?: boolean
+  }
+}
+interface AjaxInternalAxiosRequestConfig extends InternalAxiosRequestConfig {
+  custom?: {
+    showLoading?: boolean
+  }
+}
+axios.interceptors.request.use((config: AjaxInternalAxiosRequestConfig) => {
   const jwt = localStorage.getItem('jwt')
   if (jwt) {
     config.headers.Authorization = `Bearer ${jwt}`
   }
-  Toast.loading()
+  config.custom?.showLoading && Toast.loading()
   return config
 }, (error: AxiosError) => {
   Toast.info(error.message, 1000)
@@ -45,8 +55,8 @@ axios.interceptors.response.use((value) => {
 })
 
 export const ajax = {
-  get: <T>(path: string) => {
-    return axios.get<T>(path)
+  get: <T>(path: string, config?: AjaxRequestConfig) => {
+    return axios.get<T>(path, config)
   },
   post: <T>(path: string, data: JSONValue) => {
     return axios.post<T>(path, data)
