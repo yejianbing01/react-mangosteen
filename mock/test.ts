@@ -6,7 +6,7 @@ function getItem(): Item {
     id: faker.datatype.uuid(),
     user_id: faker.datatype.uuid(),
     amount: faker.datatype.number({ min: 100, max: 10000 }),
-    tag_ids: [1, 2],
+    tag_ids: ['1', '2'],
     happen_at: faker.datatype.datetime().toISOString(),
     created_at: faker.datatype.datetime().toISOString(),
     updated_at: faker.datatype.datetime().toISOString(),
