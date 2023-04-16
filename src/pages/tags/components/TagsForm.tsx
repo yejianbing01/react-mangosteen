@@ -47,7 +47,7 @@ export const TagsForm: FC<Props> = ({ type }) => {
     setError(error)
     if (!hasError(error)) {
       // 发送ajax请求
-      const res = await ajax.post<Resource<Tag>>('/api/v1/tags1', data)
+      const res = await ajax.post<Resource<Tag>>('/api/v1/tags', data)
       setData(res.data.resource)
       nav(`/items/new?kind=${kind}`)
     }

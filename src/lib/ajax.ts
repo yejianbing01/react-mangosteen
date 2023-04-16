@@ -35,7 +35,7 @@ axios.interceptors.request.use((config: AjaxInternalAxiosRequestConfig) => {
   if (jwt) {
     config.headers.Authorization = `Bearer ${jwt}`
   }
-  config.custom?.showLoading && Toast.loading()
+  config.custom?.showLoading !== false && Toast.loading()
   return config
 }, (error: AxiosError) => {
   let title = error.message
