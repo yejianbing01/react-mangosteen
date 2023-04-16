@@ -3,25 +3,26 @@ import { useState } from 'react'
 import { Icon } from '../../components/Icon'
 import { DatePicker } from '../../components/DatePicker'
 import { Drawer } from '../../components/Drawer'
+import { time } from '../../lib/time'
 
 interface Props {
-  date: string
-  setDate?: (value: string) => void
+  value: Date
+  onChange: (value: Date) => void
 }
 export const ItemDate: FC<Props> = (props) => {
-  const { date, setDate } = props
+  const { value, onChange } = props
   const [datePickVisible, setDatePickVisible] = useState(false)
 
   return (
 		<>
 			<Icon name="calendar" className="w-24px h-24px grow-0 shrink-0" onClick={() => setDatePickVisible(true)} />
-			<span grow-0 shrink-0 text-12px color="#999" onClick={() => setDatePickVisible(true)}>{date}</span>
+			<span grow-0 shrink-0 text-12px color="#999" onClick={() => setDatePickVisible(true)}>{time(value).format()}</span>
       <Drawer placement="bottom" visible={datePickVisible} onClose={() => setDatePickVisible(false)} >
         <DatePicker
-          value={new Date(date)}
+          value={new Date(value)}
           onCancel={() => setDatePickVisible(false)}
           onConfirm={(time) => {
-            setDate?.(time.format())
+            onChange(time.date)
             setDatePickVisible(false)
           }}
         />

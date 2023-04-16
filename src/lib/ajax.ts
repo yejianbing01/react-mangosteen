@@ -34,7 +34,7 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((value) => {
   Toast.hide()
   return value
-}, (error: AxiosError) => {
+}, (error: AxiosError<{ errors: {} }>) => {
   let title = error.message
   if (error.response?.status === 401) {
     title = '信息异常，请重新登录'

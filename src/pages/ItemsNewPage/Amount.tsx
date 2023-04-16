@@ -2,12 +2,15 @@ import type { FC, ReactNode } from 'react'
 import { useState } from 'react'
 
 interface Props {
+  value: number
+  onChange: (value: number) => void
+  onSubmit: () => void
   className?: string
   itemDate: ReactNode
 }
-export const DateAndAmount: FC<Props> = (props) => {
-  const { className, itemDate } = props
-  const [output, setOutput] = useState('0')
+export const Amount: FC<Props> = (props) => {
+  const { value, onChange, onSubmit, className, itemDate } = props
+  const [output, setOutput] = useState(value.toString())
 
   const append = (char: string) => {
     let _output = output
@@ -29,9 +32,13 @@ export const DateAndAmount: FC<Props> = (props) => {
     if (_output.includes('.') && (_output.length - _output.indexOf('.') > 3)) { return }
     if (_output.length > 16) { return }
     setOutput(_output)
+    onChange(parseFloat(_output) * 100)
   }
 
-  const clear = () => setOutput('0')
+  const clear = () => {
+    setOutput('0')
+    onChange(0)
+  }
 
   return (
 		<div className={className} >
@@ -52,7 +59,7 @@ export const DateAndAmount: FC<Props> = (props) => {
 				<button row-start-4 col-start-1 row-end-5 col-end-3 onClick={() => append('0')} >0</button>
 				<button row-start-4 col-start-3 row-end-5 col-end-4 onClick={() => append('.')} >.</button>
 				<button row-start-1 col-start-4 row-end-3 col-end-5 onClick={clear}>清空</button>
-				<button row-start-3 col-start-4 row-end-5 col-end-5 >提交</button>
+				<button onClick={onSubmit} row-start-3 col-start-4 row-end-5 col-end-5 >提交</button>
 			</div>
 		</div>
   )
