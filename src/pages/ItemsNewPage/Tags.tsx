@@ -1,5 +1,6 @@
-import type { FC } from 'react'
-import { Link } from 'react-router-dom'
+import type { FC, TouchEvent } from 'react'
+import { useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import useSWRInfinite from 'swr/infinite'
 import styled from 'styled-components'
 import { Icon } from '../../components/Icon'
@@ -17,6 +18,7 @@ interface Props {
 }
 export const Tags: FC<Props> = (props) => {
   const { kind, value, onChange } = props
+  const nav = useNavigate()
 
   const { data, error, isValidating, size, setSize } = useSWRInfinite(
     (pageIndex, previousPageData) => {
@@ -33,6 +35,31 @@ export const Tags: FC<Props> = (props) => {
 
   const hasMore = data && data[data.length - 1].resources.length === 10
 
+  // 长按跳转编辑
+  const touchTimerRef = useRef<number>()
+  const touchPositionRef = useRef<{ x?: number; y?: number }>({ x: undefined, y: undefined })
+  const onTouchStart = (e: TouchEvent<HTMLLIElement>, id: string) => {
+    touchTimerRef.current = window.setTimeout(() => nav(`/tags/${id}`), 500)
+    touchPositionRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+  const onTouchMove = (e: TouchEvent) => {
+    const { x, y } = touchPositionRef.current
+    if (x === undefined || y === undefined) { return }
+
+    const { clientX, clientY } = e.touches[0]
+    const moved = Math.sqrt((clientX - x) ** 2 + (clientY - y) ** 2)
+    if (moved > 10) {
+      window.clearTimeout(touchTimerRef.current)
+      touchTimerRef.current = undefined
+      touchPositionRef.current = { x: undefined, y: undefined }
+    }
+  }
+  const onTouchEnd = () => {
+    window.clearTimeout(touchTimerRef.current)
+    touchTimerRef.current = undefined
+    touchPositionRef.current = { x: undefined, y: undefined }
+  }
+
   return (
 		<>
 			<ol grid grid-cols="[repeat(auto-fill,48px)]"
@@ -48,7 +75,11 @@ export const Tags: FC<Props> = (props) => {
 					</Link>
 				{getTags().map((tag, index) =>
 					<li key={index} flex justify-center items-center flex-col gap-y-8px
-						onClick={() => onChange?.([tag.id])}>
+						onClick={() => onChange?.([tag.id])}
+						onTouchStart={e => onTouchStart(e, tag.id)}
+						onTouchMove={onTouchMove}
+						onTouchEnd={onTouchEnd}
+					>
 						<span w-48px h-48px rounded='50%' bg="#EFEFEF" text-24px
 							flex justify-center items-center b-1px b-solid
 							b={value?.includes(tag.id) ? '[var(--primary-color)]' : 'transparent'}>
