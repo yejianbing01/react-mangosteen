@@ -9,6 +9,7 @@ import type { FormError } from '../lib/validate'
 import { hasError, validate } from '../lib/validate'
 import { useSignInStore } from '../stores/useSignInStore'
 import { useHashSearchParams } from '../hooks/useHashSearchParams'
+import { BackIcon } from '../components/BackIcon'
 
 interface Props {
   title?: string
@@ -52,7 +53,7 @@ export const SignIn: FC<Props> = ({ title }) => {
   return (
     <>
   		<div j-bg>
-        <TopNav title='登录' icon={<Icon name='back' className='w-24px h-24px' />} />
+        <TopNav title='登录' icon={<BackIcon className='w-24px h-24px' />} />
   		</div>
       <div text-center pt-40px pb-16px>
         <Icon name="logo" className="w-64px h-68px" />

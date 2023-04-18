@@ -1,5 +1,4 @@
 import type { FC, ReactNode } from 'react'
-import { Icon } from '../../components/Icon'
 import { Tabs } from '../../components/Tabs'
 import { TopNav } from '../../components/TopNav'
 import { useCreateItemStore } from '../../stores/useCreateItemStore'
@@ -7,6 +6,7 @@ import { time } from '../../lib/time'
 import { hasError, validate } from '../../lib/validate'
 import { Toast } from '../../components/Toast'
 import { ajax } from '../../lib/ajax'
+import { BackIcon } from '../../components/BackIcon'
 import { Amount } from './Amount'
 import { Tags } from './Tags'
 import { ItemDate } from './ItemDate'
@@ -38,7 +38,7 @@ export const ItemsNewPage: FC = () => {
 
   return (
     <div flex flex-col h-screen>
-			<TopNav title='记一笔' icon={<Icon name='back' />} className="j-bg grow-0 shrink-0" />
+			<TopNav title='记一笔' icon={<BackIcon />} className="j-bg grow-0 shrink-0" />
       <div grow-1 shrink-1 overflow-hidden>
     		<Tabs tabItems={items} value={data.kind} onChange={value => setData({ kind: value, tag_ids: [] })}
     			className="children-grow-1 text-center bg-[#8f4cd7]"
