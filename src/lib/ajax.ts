@@ -75,5 +75,7 @@ export const ajax = {
   patch: <T>(path: string, data: JSONValue) => {
     return axios.patch<T>(path, data)
   },
-  delete: () => {},
+  delete: (path: string) => {
+    return axios.delete(path)
+  }
 }
