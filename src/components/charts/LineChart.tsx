@@ -8,15 +8,18 @@ interface Props {
 }
 export const LineChart: FC<Props> = (props) => {
   const { className, items } = props
-  const chartRef = useRef<HTMLDivElement>(null)
+  const chartDOMRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
+  const chartRef = useRef<echarts.ECharts>()
+
   const xData = items.map(item => item.x)
   const yData = items.map(item => item.y)
 
   useEffect(() => {
-    if (!chartRef.current) { return }
+    if (!chartDOMRef.current) { return }
     if (initializedRef.current) { return }
-    const myChart = echarts.init(chartRef.current)
+    const myChart = echarts.init(chartDOMRef.current)
+    chartRef.current = myChart
     initializedRef.current = true
     const options: echarts.EChartsOption = {
       xAxis: {
@@ -55,7 +58,11 @@ export const LineChart: FC<Props> = (props) => {
     myChart.setOption(options)
   }, [])
 
+  useEffect(() => {
+    chartRef.current?.setOption({ xAxis: { data: xData }, series: [{ data: yData }] })
+  }, [items])
+
   return (
-			<div className={className} ref={chartRef}></div>
+			<div className={className} ref={chartDOMRef}></div>
   )
 }

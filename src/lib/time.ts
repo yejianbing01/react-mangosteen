@@ -22,8 +22,20 @@ export class Time {
     this.#date = p ? new Date(p) : new Date()
   }
 
+  get firstDayOfMonth() {
+    return new Time(new Date(this.year, this.month - 1, 1))
+  }
+
   get lastDayOfMonth() {
     return new Time(new Date(this.year, this.month - 1 + 1, 0))
+  }
+
+  get dayCountOfMonth() {
+    return this.lastDayOfMonth.day
+  }
+
+  get clone() {
+    return new Time(this.#date)
   }
 
   /**
