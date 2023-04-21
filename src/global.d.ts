@@ -27,6 +27,7 @@ interface Item {
   amount: number
   note?: string
   tag_ids: string[]
+  tags?: Tag[]
   happen_at: string
   created_at: string
   updated_at: string

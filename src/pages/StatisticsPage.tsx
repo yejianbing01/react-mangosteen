@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import { useState } from 'react'
-import { Icon } from '../components/Icon'
 import { TopNav } from '../components/TopNav'
 import type { TimeRange } from '../components/TimeRangePicker'
 import { TimeRangePicker } from '../components/TimeRangePicker'
@@ -8,6 +7,7 @@ import { LineChart } from '../components/charts/LineChart'
 import { PieChart } from '../components/charts/PieChart'
 import { RankChart } from '../components/charts/RankChart'
 import { Select } from '../components/Select'
+import { BackIcon } from '../components/BackIcon'
 
 export const StatisticsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
@@ -62,7 +62,7 @@ export const StatisticsPage: FC = () => {
   return (
 		<div>
 			<div j-bg>
-				<TopNav title='统计图表' icon={<Icon name="back" className='w-24px h-24px' />} />
+				<TopNav title='统计图表' icon={<BackIcon className='w-24px h-24px' />} />
 				<TimeRangePicker selected={itemsRange} onChange={selected => setItemsRange(selected)} />
       </div>
       <div h-48px text-16px p-x-16px pt-16px flex items-center gap-x-8px>

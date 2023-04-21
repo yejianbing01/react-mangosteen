@@ -4,7 +4,7 @@ import { Drawer } from '../../../components/Drawer'
 import { Icon } from '../../../components/Icon'
 
 const menuItems = [
-  { path: '/chart', text: '统计图表', icon: 'chart' },
+  { path: '/statistics', text: '统计图表', icon: 'chart' },
   { path: '/export', text: '导出数据', icon: 'export' },
   { path: '/tags', text: '自定义标签', icon: 'category' },
   { path: '/noty', text: '记账提醒', icon: 'noty' },
