@@ -4,28 +4,34 @@ import { useEffect, useRef } from 'react'
 
 interface Props {
   className?: string
-  items: { name: string; value: number }[]
+  items: { name: string; value: number | string; sign: string }[]
 }
 export const PieChart: FC<Props> = (props) => {
   const { className, items } = props
-  const chartRef = useRef<HTMLDivElement>(null)
+
+  const chartDOMRef = useRef<HTMLDivElement>(null)
   const initializedRef = useRef(false)
+  const chartRef = useRef<echarts.EChartsType>()
 
   useEffect(() => {
-    if (!chartRef.current) { return }
+    if (!chartDOMRef.current) { return }
     if (initializedRef.current) { return }
-    const myChart = echarts.init(chartRef.current)
+    chartRef.current = echarts.init(chartDOMRef.current)
     initializedRef.current = true
     const options: echarts.EChartsOption = {
       tooltip: {
-        trigger: 'item'
+        trigger: 'item',
+        show: true,
+        formatter: ({ data: { name, value, sign } }: any) => {
+          return `${sign} ${name}: ${value}元`
+        }
       },
       series: [
         {
           name: 'Access From',
           type: 'pie',
-          radius: '90%',
-          data: items,
+          radius: '85%',
+          data: items.map(item => ({ ...item, value: parseFloat(item.value.toString()) })),
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
@@ -36,10 +42,17 @@ export const PieChart: FC<Props> = (props) => {
         }
       ]
     }
-    myChart.setOption(options)
+    chartRef.current.setOption(options)
   }, [])
 
+  useEffect(() => {
+    if (!chartRef.current) { return }
+    chartRef.current.setOption({
+      series: [{ data: items }]
+    })
+  }, [items])
+
   return (
-			<div className={className} ref={chartRef}></div>
+			<div className={className} ref={chartDOMRef}></div>
   )
 }

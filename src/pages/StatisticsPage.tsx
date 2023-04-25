@@ -13,6 +13,7 @@ import { ajax } from '../lib/ajax'
 import { time } from '../lib/time'
 
 type Groups = { happened_at: string; tag?: string; amount: number }[]
+type Groups2 = { tag_id: string; tag: Tag; amount: number }[]
 
 export const StatisticsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
@@ -28,21 +29,20 @@ export const StatisticsPage: FC = () => {
 
   const { data: items } = useSwr(
     `/api/v1/items/summary?kind=${kind}&group_by=happened_at&happened_before=${startTime.format()}happened_after=${endTime.format()}`,
-    async (path: string) => (await ajax.get<{ groups: Groups }>(path, { custom: { showLoading: false } })).data.groups
-      .map(({ happened_at, amount }) => ({ x: happened_at, y: amount / 100 }))
+    async (path: string) =>
+      (await ajax.get<{ groups: Groups }>(path, { custom: { showLoading: false } })).data.groups
+        .map(({ happened_at, amount }) => ({ x: happened_at, y: (amount / 100).toFixed(2) }))
+  )
+  const { data: items2 } = useSwr(
+    `/api/v1/items/summary?kind=${kind}&group_by=tag_id&happened_before=${startTime.format()}happened_after=${endTime.format()}`,
+    async (path: string) =>
+      (await ajax.get<{ groups: Groups2 }>(path, { custom: { showLoading: false } })).data.groups
+        .map(({ tag: { name, sign }, amount }) => ({ tag: { name, sign }, amount: (amount / 100).toFixed(2) }))
   )
   const itemsLineChart = defaultLineItems.map(defaultItem => items?.find(item => item.x === defaultItem.x) || defaultItem)
 
-  const itemsPieChart = [
-    { tag: { name: '吃饭', sign: '😨' }, amount: 10000 },
-    { tag: { name: '打车', sign: '🥱' }, amount: 20000 },
-    { tag: { name: '买皮肤', sign: '💖' }, amount: 68800 },
-  ].map(item => ({ name: item.tag.name, value: item.amount / 100 }))
-  const itemsRankChart = [
-    { tag: { name: '吃饭', sign: '😨' }, amount: 10000 },
-    { tag: { name: '打车', sign: '🥱' }, amount: 20000 },
-    { tag: { name: '买皮肤', sign: '💖' }, amount: 68800 },
-  ].map(item => ({ name: item.tag.name, sign: item.tag.sign, value: item.amount / 100 }))
+  const itemsPieChart = items2?.map(item => ({ name: item.tag.name, value: item.amount, sign: item.tag.sign })) || []
+  const itemsRankChart = items2?.map(item => ({ name: item.tag.name, sign: item.tag.sign, value: item.amount })) || []
 
   return (
 		<div>

@@ -5,11 +5,11 @@ const colors = ['#5470c6', '#ffbab0', '#ffa750', '#8748d3', '#53a867', '#eba953'
 
 interface Props {
   className?: string
-  items: { name: string; sign: string; value: number }[]
+  items: { name: string; sign: string; value: number | string }[]
 }
 export const RankChart: FC<Props> = (props) => {
-  const { className, items } = props
-
+  const { className, items: _items } = props
+  const items = _items.map(item => ({ ...item, value: parseFloat(item.value.toString()) }))
   const total = items.reduce((result, item) => result + item.value, 0) ?? 0
   const max = items.reduce((prev, item) => Math.max(prev, item.value), 0) ?? 0
   return (
@@ -23,7 +23,7 @@ export const RankChart: FC<Props> = (props) => {
 								rounded="50%" bg="#EFEFEF" flex justify-center items-center text-24px>
 								{item.sign}
 							</div>
-							<div row-start-1 col-start-2 row-end-2 col-end-3>{item.name} - {`${(item.value / total * 100).toFixed(0)}%` }</div>
+							<div row-start-1 col-start-2 row-end-2 col-end-3>{item.name} - {`${(item.value / total * 100).toFixed(2)}%` }</div>
 							<div row-start-1 col-start-3 row-end-2 col-end-4 text-right>
 								<Money value={item.value} />
 							</div>

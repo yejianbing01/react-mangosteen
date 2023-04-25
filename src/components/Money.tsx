@@ -5,6 +5,6 @@ interface Props {
 }
 export const Money: FC<Props> = (props) => {
   return (
-		<span>{`💰${props.value}`}</span>
+		<span>{`￥${props.value}元`}</span>
   )
 }

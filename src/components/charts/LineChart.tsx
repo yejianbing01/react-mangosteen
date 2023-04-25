@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 
 interface Props {
   className?: string
-  items: { x: string; y: number }[]
+  items: { x: string; y: string | number }[]
 }
 export const LineChart: FC<Props> = (props) => {
   const { className, items } = props
@@ -22,6 +22,16 @@ export const LineChart: FC<Props> = (props) => {
     chartRef.current = myChart
     initializedRef.current = true
     const options: echarts.EChartsOption = {
+      tooltip: {
+        trigger: 'axis',
+        show: true,
+        formatter: ([{ axisValue, data }]: any) => {
+          const parts = axisValue.split('-')
+          const label = `${parts[0]}年${parts[1]}月${parts[2]}日`
+          const value = data === null ? '无数据' : `${data}元`
+          return `${label}<br/><div style="text-align: right;">${value}</div>`
+        }
+      },
       xAxis: {
         type: 'category',
         data: xData,
@@ -43,10 +53,6 @@ export const LineChart: FC<Props> = (props) => {
         bottom: '0%'
       },
       color: ['#5a72e0'],
-      tooltip: {
-        show: true,
-        trigger: 'axis'
-      },
       series: [
         {
           data: yData,
