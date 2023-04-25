@@ -2,10 +2,10 @@ import { create } from 'zustand'
 import type { FormError } from '../lib/validate'
 import { time } from '../lib/time'
 
-type Data = Partial<Item>
+type Data = Item
 
-interface CreateItemData {
-  data: Data
+type CreateItemData = {
+  data: Partial<Data>
   error: FormError<Data>
   setData: (data: Partial<Data>) => void
   setError: (error: Partial<FormError<Data>>) => void

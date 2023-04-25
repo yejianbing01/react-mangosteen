@@ -35,7 +35,7 @@ interface Item {
   deleted_at?: string
 }
 
-interface Tag {
+type Tag = {
   id: string
   kind: Kind
   user_id: string
