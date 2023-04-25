@@ -14,7 +14,7 @@ export const Tabs = <T extends string>(props: Props<T>) => {
 		<div flex flex-col h="100%">
 			<ol className={className}
 				text-white flex children-px-24px children-pb-12px
-				grow-0 shrink-0
+				grow-0 shrink-0 overflow-x-auto whitespace-nowrap
 			>
 				{tabItems.map(({ key, text }) =>
 						<li
@@ -26,7 +26,7 @@ export const Tabs = <T extends string>(props: Props<T>) => {
 						</li>
 				)}
 			</ol>
-			<div overflow-scroll grow-1 shrink-1>
+			<div overflow-scroll grow-1 shrink-1 >
 				{curElement}
 			</div>
 		</div>
