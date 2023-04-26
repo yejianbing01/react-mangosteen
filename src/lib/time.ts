@@ -112,6 +112,11 @@ export class Time {
     })
   }
 
+  setParts(p: Partial<Parts>) {
+    this.parts = p
+    return new Time(this.#date)
+  }
+
   get year() {
     return this.parts.year
   }

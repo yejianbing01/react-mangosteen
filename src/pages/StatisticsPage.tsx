@@ -10,7 +10,7 @@ import { RankChart } from '../components/charts/RankChart'
 import { Select } from '../components/Select'
 import { BackIcon } from '../components/BackIcon'
 import { ajax } from '../lib/ajax'
-import { time } from '../lib/time'
+import { timeRangeToTime } from '../lib/timeRangeToTime'
 
 type Groups = { happen_at: string; tag?: string; amount: number }[]
 type Groups2 = { tag_id: string; tag: Tag; amount: number }[]
@@ -18,15 +18,6 @@ type Groups2 = { tag_id: string; tag: Tag; amount: number }[]
 type getSWRKeyParams = { kind: Kind; start: string; end: string; group_by: 'happen_at' | 'tag_id' }
 const getSWRKey = ({ kind, group_by, start, end }: getSWRKeyParams) =>
   `/api/v1/items/summary?kind=${kind}&group_by=${group_by}&happened_before=${start}happened_after=${end}`
-
-const timeRangeMap: { [key in TimeRange]: number } = {
-  thisMonth: 0,
-  thisYear: 0,
-  custom: 0,
-  lastMonth: -1,
-  twoMonthAgo: -2,
-  threeMonthAgo: -3
-}
 
 export const StatisticsPage: FC = () => {
   const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
@@ -36,13 +27,7 @@ export const StatisticsPage: FC = () => {
     { text: '收入', value: 'income' },
   ]
 
-  const getTimeRange = (timeRange: TimeRange) => {
-    const startTime = time().add(timeRangeMap[timeRange], 'month').firstDayOfMonth
-    const endTime = startTime.lastDayOfMonth.add(1, 'day')
-    return { startTime, endTime, start: startTime.format(), end: endTime.format() }
-  }
-
-  const { startTime, start, end } = getTimeRange(itemsRange)
+  const { startTime, start, end } = timeRangeToTime(itemsRange)
 
   const { data: items } = useSwr(
     getSWRKey({ kind, group_by: 'happen_at', start, end }),

@@ -10,11 +10,17 @@ const Div = styled.div`
   text-align: center;
 `
 
-export const ItemsList: FC = () => {
+interface Props {
+  start: string
+  end: string
+}
+export const ItemsList: FC<Props> = (props) => {
+  const { start, end } = props
+
   const { data, error, isLoading, isValidating, size, setSize } = useSWRInfinite(
     (pageIndex, previousPageData) => {
-      if (previousPageData && previousPageData.resources.length < 10) { return null }
-      return `/api/v1/items?page=${pageIndex + 1}&pre_page=20`
+      if (previousPageData && previousPageData.resources.length < 25) { return null }
+      return `/api/v1/items?happened_after=${start}&happened_before=${end}&page=${pageIndex + 1}&per_page=25`
     }, async key => (await axios.get<Resources<Item>>(key)).data
   )
 
@@ -24,7 +30,7 @@ export const ItemsList: FC = () => {
     return items
   }
 
-  const hasMore = data && data[data.length - 1].resources.length === 10
+  const hasMore = data && data[data.length - 1].resources.length === 25
 
   if (isLoading) { return <Loading /> }
 
