@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react'
 import { SmsCodeInput } from './SmsCodeInput'
 import { EmojiInput } from './EmojiInput'
+import { DateInput } from './DateInput'
 
 type Props = {
   value?: string
@@ -8,14 +9,16 @@ type Props = {
   label?: string | ReactNode
   placeholder?: string
   error?: string
+  className?: string
 } & (
   | { type: 'text' }
   | { type: 'emoji' }
+  | { type: 'date'; placeholder?: string }
   | { type: 'sms_code'; request: () => Promise<unknown> }
 )
 
 export const Input: FC<Props> = (props) => {
-  const { type, label, value, placeholder = '请输入', onChange, error } = props
+  const { type, label, value, placeholder = '请输入', onChange, error, className } = props
 
   const renderInput = () => {
     if (type === 'text') {
@@ -32,13 +35,17 @@ export const Input: FC<Props> = (props) => {
         <SmsCodeInput value={value} onChange={onChange} request={props.request} />
       )
     }
+
+    if (type === 'date') {
+      return <DateInput value={value} placeholder={placeholder} onConfirm={onChange} />
+    }
   }
 
   return (
-		<div>
+		<div className={className} >
 			<div text-18px mb-8px>{label}</div>
 			{renderInput()}
-			<span text-12px text-red m-t-8px>{error || '　'}</span>
+			<div text-12px text-red m-t-8px>{error || '　'}</div>
 		</div>
   )
 }

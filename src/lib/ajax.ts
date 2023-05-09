@@ -35,6 +35,9 @@ axios.interceptors.request.use((config: AjaxInternalAxiosRequestConfig) => {
   if (jwt) {
     config.headers.Authorization = `Bearer ${jwt}`
   }
+  if (!config.custom) {
+    config.custom = { showLoading: false }
+  }
   config.custom?.showLoading !== false && Toast.loading()
   return config
 }, (error: AxiosError) => {
@@ -48,9 +51,10 @@ axios.interceptors.request.use((config: AjaxInternalAxiosRequestConfig) => {
   return Promise.reject(error)
 })
 
-axios.interceptors.response.use((value) => {
-  Toast.hide()
-  return value
+axios.interceptors.response.use((res) => {
+  const config = res.config as AjaxInternalAxiosRequestConfig
+  config.custom?.showLoading && Toast.hide()
+  return res
 }, (error: AxiosError<{ errors: { [propName: string]: [] } }>) => {
   let title = error.message
   if (error.response?.status === 401) {

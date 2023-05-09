@@ -24,11 +24,13 @@ export const timeRangeToTime = (timeRange: TimeRange) => {
       startTime = time().setParts({ month: 1 }).firstDayOfMonth
       endTime = time().add(1, 'year').setParts({ month: 1 }).firstDayOfMonth
       break
+    case 'custom':
+      break
     default:
       startTime = time()
       endTime = time()
       break
   }
 
-  return { startTime, endTime, start: startTime.format(), end: endTime.format() }
+  return { startTime, endTime, start: startTime?.format(), end: endTime?.format() }
 }

@@ -11,15 +11,15 @@ const Div = styled.div`
 `
 
 interface Props {
-  start: string
-  end: string
+  start?: string
+  end?: string
 }
 export const ItemsList: FC<Props> = (props) => {
   const { start, end } = props
-
   const { data, error, isLoading, isValidating, size, setSize } = useSWRInfinite(
     (pageIndex, previousPageData) => {
       if (previousPageData && previousPageData.resources.length < 25) { return null }
+      if (!start || !end) { return null }
       return `/api/v1/items?happened_after=${start}&happened_before=${end}&page=${pageIndex + 1}&per_page=25`
     }, async key => (await axios.get<Resources<Item>>(key)).data
   )
