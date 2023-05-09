@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AddItemFloatButton } from '../../components/AddItemFloatButton'
 import { TopNav } from '../../components/TopNav'
 import { useTopMenuStore } from '../../stores/useTopMenuStore'
@@ -33,6 +33,10 @@ export const ItemsPage: FC = () => {
     setStart(start)
     setEnd(end)
   }
+
+  useEffect(() => {
+    return () => setVisible(false)
+  }, [])
 
   return (
 		<div flex flex-col h-screen>
