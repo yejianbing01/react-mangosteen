@@ -1,4 +1,5 @@
 import { Navigate, createHashRouter } from 'react-router-dom'
+import React from 'react'
 import { WelcomeLayout } from '../layouts/WelcomeLayout'
 import { Welcome1 } from '../pages/Welcome1'
 import { Welcome2 } from '../pages/Welcome2'
@@ -10,10 +11,12 @@ import { SignIn } from '../pages/SignIn'
 import { ItemsNewPage } from '../pages/ItemsNewPage'
 import { TagsNewPage } from '../pages/tags/TagsNewPage'
 import { TagsEditPage } from '../pages/tags/TagsEditPage'
-import { StatisticsPage } from '../pages/StatisticsPage'
+// import { StatisticsPage } from '../pages/StatisticsPage'
 import { ajax } from '../lib/ajax'
 import ErrorPage from '../pages/ErrorPage'
 import { Root } from '../components/Root'
+
+const StatisticsPage = React.lazy(() => import('../pages/StatisticsPage'))
 
 const itemsPageLoader = async () => {
   const res = await ajax.get<Resources<Item>>('/api/v1/items?page=1')

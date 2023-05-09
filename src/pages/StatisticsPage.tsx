@@ -2,7 +2,6 @@ import type { FC } from 'react'
 import { useState } from 'react'
 import useSwr from 'swr'
 import { TopNav } from '../components/TopNav'
-import type { TimeRange } from '../components/TimeRangePicker'
 import { TimeRangePicker } from '../components/TimeRangePicker'
 import { LineChart } from '../components/charts/LineChart'
 import { PieChart } from '../components/charts/PieChart'
@@ -10,24 +9,26 @@ import { RankChart } from '../components/charts/RankChart'
 import { Select } from '../components/Select'
 import { BackIcon } from '../components/BackIcon'
 import { ajax } from '../lib/ajax'
-import { timeRangeToTime } from '../lib/timeRangeToTime'
+import { Time } from '../lib/time'
 
 type Groups = { happen_at: string; tag?: string; amount: number }[]
 type Groups2 = { tag_id: string; tag: Tag; amount: number }[]
 
 type getSWRKeyParams = { kind: Kind; start: string; end: string; group_by: 'happen_at' | 'tag_id' }
-const getSWRKey = ({ kind, group_by, start, end }: getSWRKeyParams) =>
-  `/api/v1/items/summary?kind=${kind}&group_by=${group_by}&happened_before=${start}happened_after=${end}`
+const getSWRKey = ({ kind, group_by, start, end }: getSWRKeyParams) => {
+  return (!start || !end) ? '' : `/api/v1/items/summary?kind=${kind}&group_by=${group_by}&happened_before=${start}happened_after=${end}`
+}
 
 export const StatisticsPage: FC = () => {
-  const [itemsRange, setItemsRange] = useState<TimeRange>('thisMonth')
   const [kind, setKind] = useState<Kind>('expenses')
   const selectItems: { text: string; value: Kind }[] = [
     { text: '支出', value: 'expenses' },
     { text: '收入', value: 'income' },
   ]
 
-  const { startTime, start, end } = timeRangeToTime(itemsRange)
+  const [start, setStart] = useState('')
+  const [end, setEnd] = useState('')
+  const [startTime, setStartTime] = useState<Time>(new Time())
 
   const { data: items } = useSwr(
     getSWRKey({ kind, group_by: 'happen_at', start, end }),
@@ -52,7 +53,7 @@ export const StatisticsPage: FC = () => {
 		<div>
 			<div j-bg>
 				<TopNav title='统计图表' icon={<BackIcon className='w-24px h-24px' />} />
-				<TimeRangePicker selected={itemsRange} onChange={selected => setItemsRange(selected)} />
+        <TimeRangePicker onChange={(start, end, startTime) => { setStart(start || ''); setEnd(end || ''); setStartTime(startTime || new Time()) }} />
       </div>
       <div h-48px text-16px p-x-16px pt-16px flex items-center gap-x-8px>
         <span>类型</span>
@@ -66,3 +67,5 @@ export const StatisticsPage: FC = () => {
 		</div>
   )
 }
+
+export default StatisticsPage

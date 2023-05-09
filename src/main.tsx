@@ -15,6 +15,8 @@ const root = ReactDOM.createRoot(div)
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <React.Suspense>
+      <RouterProvider router={router} />
+    </React.Suspense>
   </React.StrictMode>
 )

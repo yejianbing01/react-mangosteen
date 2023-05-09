@@ -1,12 +1,13 @@
 import type { FC, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 import { timeRangeToTime } from '../lib/timeRangeToTime'
+import type { Time } from '../lib/time'
 import { Tabs } from './Tabs'
 
 export type TimeRange = 'thisMonth' | 'lastMonth' | 'twoMonthAgo' | 'threeMonthAgo' | 'thisYear' | 'custom'
 interface Props {
   // selected: TimeRange
-  onChange: (start?: string, end?: string) => void
+  onChange: (start?: string, end?: string, startTime?: Time, endTime?: Time) => void
   timeRanges?: { key: TimeRange; text: string | ReactNode }[]
 }
 const defaultTimeRanges: { key: TimeRange; text: string | ReactNode }[] = [
@@ -18,10 +19,10 @@ const defaultTimeRanges: { key: TimeRange; text: string | ReactNode }[] = [
 export const TimeRangePicker: FC<Props> = (props) => {
   const { timeRanges = defaultTimeRanges, onChange } = props
   const [selected, setSelected] = useState<TimeRange>('thisMonth')
-  const { start, end } = timeRangeToTime(selected)
+  const { start, end, startTime, endTime } = timeRangeToTime(selected)
 
   useEffect(() => {
-    onChange(start, end)
+    onChange(start, end, startTime, endTime)
   }, [start, end])
 
   return (
