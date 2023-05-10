@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { useState } from 'react'
 import { Input } from '../../../components/Input/Input'
 import type { FormError } from '../../../lib/validate'
-import { validate } from '../../../lib/validate'
+import { hasError, validate } from '../../../lib/validate'
 
 type Props = {
   onConfirm?: ({ start, end }: { start: string; end: string }) => void
@@ -18,9 +18,7 @@ export const CustomTimePicker: FC<Props> = (props) => {
       { key: 'start', type: 'required', message: '开始日期不允许为空' },
       { key: 'end', type: 'required', message: '结束日期不允许为空' }
     ])
-    if (error) {
-      return setError(error)
-    }
+    if (hasError(error)) { return setError(error) }
     onConfirm?.({ start, end })
   }
 
