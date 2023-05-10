@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Tabs } from '../../components/Tabs'
 import { TopNav } from '../../components/TopNav'
 import { useCreateItemStore } from '../../stores/useCreateItemStore'
@@ -15,13 +16,14 @@ export type ItemKind = 'expenses' | 'income'
 
 export const ItemsNewPage: FC = () => {
   const { data, setData } = useCreateItemStore()
+  const nav = useNavigate()
 
   const items: { key: ItemKind; text: string; element: ReactNode }[] = [
     { key: 'expenses', text: '支出', element: <Tags kind='expenses' value={data.tag_ids} onChange={tag_ids => setData({ tag_ids })} /> },
     { key: 'income', text: '收入', element: <Tags kind='income' value={data.tag_ids} onChange={tag_ids => setData({ tag_ids })} /> },
   ]
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const error = validate(data, [
       { key: 'kind', type: 'required', message: '类型不允许为空' },
       { key: 'tag_ids', type: 'required', message: '标签不允许为空' },
@@ -32,13 +34,14 @@ export const ItemsNewPage: FC = () => {
       const info = Object.values(error).flat().map((item, index) => <p key={index}>{item}</p>)
       Toast.info(info, 1000)
     } else {
-      ajax.post('/api/v1/items', data)
+      await ajax.post('/api/v1/items', data)
+      nav('/items')
     }
   }
 
   return (
     <div flex flex-col h-screen>
-			<TopNav title='记一笔' icon={<BackIcon />} className="j-bg grow-0 shrink-0" />
+			<TopNav title='记一笔' icon={<BackIcon onClick={() => nav('/items')} />} className="j-bg grow-0 shrink-0" />
       <div grow-1 shrink-1 overflow-hidden>
     		<Tabs tabItems={items} value={data.kind} onChange={value => setData({ kind: value, tag_ids: [] })}
     			className="children-grow-1 text-center bg-[#8f4cd7]"

@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { useState } from 'react'
 import useSwr from 'swr'
+import { useNavigate } from 'react-router-dom'
 import { TopNav } from '../components/TopNav'
 import { TimeRangePicker } from '../components/TimeRangePicker'
 import { LineChart } from '../components/charts/LineChart'
@@ -29,6 +30,7 @@ export const StatisticsPage: FC = () => {
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
   const [startTime, setStartTime] = useState<Time>(new Time())
+  const nav = useNavigate()
 
   const { data: items } = useSwr(
     getSWRKey({ kind, group_by: 'happen_at', start, end }),
@@ -52,7 +54,7 @@ export const StatisticsPage: FC = () => {
   return (
 		<div>
 			<div j-bg>
-				<TopNav title='统计图表' icon={<BackIcon className='w-24px h-24px' />} />
+				<TopNav title='统计图表' icon={<BackIcon className='w-24px h-24px' onClick={() => nav('/items') } /> } />
         <TimeRangePicker onChange={(start, end, startTime) => { setStart(start || ''); setEnd(end || ''); setStartTime(startTime || new Time()) }} />
       </div>
       <div h-48px text-16px p-x-16px pt-16px flex items-center gap-x-8px>

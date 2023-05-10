@@ -73,13 +73,13 @@ export const ajax = {
   get: <T>(path: string, config?: AjaxRequestConfig) => {
     return axios.get<T>(path, config)
   },
-  post: <T>(path: string, data: JSONValue) => {
-    return axios.post<T>(path, data)
+  post: <T>(path: string, data: JSONValue, config?: AjaxRequestConfig) => {
+    return axios.post<T>(path, data, config)
   },
-  patch: <T>(path: string, data: JSONValue) => {
-    return axios.patch<T>(path, data)
+  patch: <T>(path: string, data: JSONValue, config?: AjaxRequestConfig) => {
+    return axios.patch<T>(path, data, config)
   },
-  delete: (path: string) => {
-    return axios.delete(path)
+  delete: (path: string, config?: AjaxRequestConfig) => {
+    return axios.delete(path, config)
   }
 }

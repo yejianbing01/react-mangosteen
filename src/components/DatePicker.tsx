@@ -55,7 +55,6 @@ export const Column: FC<ColumnProps> = (props) => {
 				onTouchStart={onTouchStart}
 				onTouchMove={onTouchMove}
 				onTouchEnd={onTouchEnd}
-				transition-all duration-100
 			>
 				<ol text-center children-h-36px children-leading-36px>
 					{ itemList.map(item => (<li key={item}>{item}</li>)) }

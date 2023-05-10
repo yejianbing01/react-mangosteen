@@ -29,7 +29,7 @@ export const TagsEditPage: FC = () => {
   return (
 		<div>
 			<div j-bg>
-				<TopNav title='修改标签' icon={<BackIcon />} />
+				<TopNav title='修改标签' icon={<BackIcon onClick={() => nav('/items')} />} />
 			</div>
       <TagsForm type="update" />
       <div px-16px>

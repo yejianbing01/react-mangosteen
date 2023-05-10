@@ -17,6 +17,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => ({
       mockPath: 'mock',
       localEnabled: command === 'serve',
     }),
-    svgsprites({ noOptimizeList: ['calendar', 'logo', 'chart', 'category', 'export', 'noty'] })
+    svgsprites({ noOptimizeList: ['pig', 'calendar', 'logo', 'chart', 'category', 'export', 'noty'] })
   ]
 })

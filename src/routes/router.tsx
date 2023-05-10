@@ -11,6 +11,7 @@ import { SignIn } from '../pages/SignIn'
 import { ItemsNewPage } from '../pages/ItemsNewPage'
 import { TagsNewPage } from '../pages/tags/TagsNewPage'
 import { TagsEditPage } from '../pages/tags/TagsEditPage'
+import { ComingSoonPage } from '../pages/ComingSoonPage'
 // import { StatisticsPage } from '../pages/StatisticsPage'
 import { ajax } from '../lib/ajax'
 import ErrorPage from '../pages/ErrorPage'
@@ -59,13 +60,12 @@ export const router = createHashRouter([
         loader: itemsPageLoader
       },
       { path: '/items/new', element: <ItemsNewPage /> },
-      { path: '/chart', element: <div>统计图表</div> },
-      { path: '/export', element: <div>导出数据</div> },
-      { path: '/tags', element: <div>自定义标签</div> },
       { path: '/tags/new', element: <TagsNewPage /> },
       { path: '/tags/:id', element: <TagsEditPage /> },
       { path: '/statistics', element: <StatisticsPage /> },
-      { path: '/noty', element: <div>记账提醒</div> },
+      { path: '/export', element: <ComingSoonPage /> },
+      { path: '/tags', element: <ComingSoonPage /> },
+      { path: '/noty', element: <ComingSoonPage /> },
     ]
   }
 ])

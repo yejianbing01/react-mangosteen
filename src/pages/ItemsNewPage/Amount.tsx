@@ -42,12 +42,12 @@ export const Amount: FC<Props> = (props) => {
 
   return (
 		<div className={className} >
-			<div flex p-t-15px p-b-16px px-16px border-t-1px border-t="#ddd" gap-x-8px items-center>
+			<div flex py-8px px-16px b-t-1px b-t-solid b-t="#ddd" gap-x-8px items-center>
         {itemDate}
 				<code grow-1 shrink-1 text-right color="#53A867">{output}</code>
 			</div>
-			<div py-1px grid grid-rows="[repeat(4,56px)]" grid-cols-4 bg="#ddd" gap-1px children-bg-white>
-				<button className="[active:bg=var(--primary-color)]" row-start-1 col-start-1 row-end-2 col-end-2 onClick={() => append('1')} >1</button>
+			<div py-1px grid grid-rows="[repeat(4,56px)]" grid-cols-4 bg="#ddd" gap-1px children-bg-white className="active:children:bg-[var(--primary-color)] active:children:text-white" >
+				<button row-start-1 col-start-1 row-end-2 col-end-2 onClick={() => append('1')} >1</button>
 				<button row-start-1 col-start-2 row-end-2 col-end-3 onClick={() => append('2')} >2</button>
 				<button row-start-1 col-start-3 row-end-2 col-end-4 onClick={() => append('3')} >3</button>
 				<button row-start-2 col-start-1 row-end-3 col-end-2 onClick={() => append('4')} >4</button>

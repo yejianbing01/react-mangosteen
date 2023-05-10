@@ -47,7 +47,7 @@ export const SignIn: FC<Props> = ({ title }) => {
     ])
     setError(error)
     if (hasError(error)) { return Promise.reject(new Error(error.email?.[0])) }
-    return ajax.post('api/v1/validation_codes', { email: data.email })
+    return ajax.post('api/v1/validation_codes', { email: data.email }, { custom: { showLoading: true } })
   }
 
   return (

@@ -8,6 +8,7 @@ import './styles/public.scss'
 import 'virtual:uno.css'
 import './styles/main.scss'
 import 'virtual:svgsprites'
+import { Loading } from './components/Loading'
 
 vhCheck()
 
@@ -16,7 +17,7 @@ const root = ReactDOM.createRoot(div)
 
 root.render(
   <React.StrictMode>
-    <React.Suspense>
+		<React.Suspense fallback={<Loading classNames='h-screen' />}>
       <RouterProvider router={router} />
     </React.Suspense>
   </React.StrictMode>

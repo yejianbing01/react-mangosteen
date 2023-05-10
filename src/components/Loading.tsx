@@ -25,9 +25,9 @@ interface Props {
 
 export const Loading: FC<Props> = ({ title, classNames }) => {
   return (
-    <Div className={c('flex flex-col justify-center items-center text-center', classNames)} >
-      <Icon name='loading' className='w-68px h-68px mb-10px' />
-      <p>{ title || '加载中...'}</p>
-    </Div>
+		<Div className={c('flex flex-col justify-center items-center text-center', classNames)} >
+			<Icon name='loading' className='w-68px h-68px mb-10px' />
+			<p>{ title || '加载中...'}</p>
+		</Div>
   )
 }
