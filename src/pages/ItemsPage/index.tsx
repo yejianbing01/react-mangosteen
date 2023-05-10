@@ -44,7 +44,7 @@ export const ItemsPage: FC = () => {
 				<TopNav title='山竹记账' icon={<Icon name="menu" className='w-24px h-24px' onClick={() => setVisible(true)} />} />
         <TimeRangePicker onChange={onTimeRangeChange} timeRanges={timeRanges} />
 			</div>
-			<ItemsSummary />
+			<ItemsSummary start={start} end={end} />
 			<div overflow-y-auto >
 				<ItemsList start={start} end={end} />
 				<AddItemFloatButton />

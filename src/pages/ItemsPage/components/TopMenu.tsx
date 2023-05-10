@@ -17,7 +17,7 @@ interface Props {
   onMaskClick?: (e: React.MouseEvent) => void
 }
 export const TopMenu: FC<Props> = ({ isVisible, onMaskClick }) => {
-  const { data, mutate } = useSWR(
+  const { data } = useSWR(
     '/api/v1/me',
     async path => (await ajax.get<Resource<User>>(path, { custom: { showLoading: false } })).data.resource
   )
@@ -27,7 +27,7 @@ export const TopMenu: FC<Props> = ({ isVisible, onMaskClick }) => {
     if (data) {
       return (
         <div flex flex-col grow-0 shrink-0 j-bg px-16px pt-32px pb-42px>
-          <h2 text-white text-24px>{data.name || '无名大侠'}</h2>
+          <h2 text-white text-24px overflow-hidden text-ellipsis whitespace-nowrap >{data.name || '无名大侠'}</h2>
           <p text="#CEA1FF">{data.email}</p>
         </div>
       )

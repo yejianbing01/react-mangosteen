@@ -17,7 +17,7 @@ type Groups2 = { tag_id: string; tag: Tag; amount: number }[]
 
 type getSWRKeyParams = { kind: Kind; start: string; end: string; group_by: 'happen_at' | 'tag_id' }
 const getSWRKey = ({ kind, group_by, start, end }: getSWRKeyParams) => {
-  return (!start || !end) ? '' : `/api/v1/items/summary?kind=${kind}&group_by=${group_by}&happened_before=${start}happened_after=${end}`
+  return (!start || !end) ? '' : `/api/v1/items/summary?kind=${kind}&group_by=${group_by}&happened_before=${end}&happened_after=${start}`
 }
 
 export const StatisticsPage: FC = () => {
